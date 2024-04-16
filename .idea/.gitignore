@@ -1,11 +1,11 @@
 .idea
-*.iml
 /out/
+*.iml
 # Default ignored files
 /shelf/
 /workspace.xml
 # Datasource local storage ignored files
-/dataSources/
+/../../../../../../:\Users\1\IdeaProjects\SkyPro\.idea/dataSources/
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
