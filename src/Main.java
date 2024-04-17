@@ -3,117 +3,241 @@ import static java.lang.Math.abs;
 public class Main {
 
     public static void main(String[] args) {
+
         // Task 1
-        System.out.println("ЗАДАЧА 1:");
-        int seconds = 2_147_483_647;
-        System.out.println("Значение переменной seconds с типом int равно " + seconds);
-        byte cycles = 127;
-        System.out.println("Значение переменной cycles с типом byte равно " + cycles);
-        short rhytms = 32767;
-        System.out.println("Значение переменной rhytms с типом short равно " + rhytms);
-        long atoms = 9_223_372_036_854_775_807L;
-        System.out.println("Значение переменной atoms с типом atoms равно " + atoms);
-        float mathematic = 3.4E+38f;
-        System.out.println("Значение переменной mathematic с типом float равно " + mathematic);
-        double astronomic = 1.7E+308;
-        System.out.println("Значение переменной astronomic с типом double равно " + astronomic);
+        System.out.println("TASK 1:");
+        int age = 17;
+        if (age >= 18) {
+            System.out.println("Возраст человека равен " + age + " он совершеннолетний.");
+        } else {
+            System.out.println("Возраст человека равен " + age + ". Возраст совершеннолетия еще не наступил, нужно немного подождать");
+        }
+
+        age = 20;
+        if (age >= 18) {
+            System.out.println("Возраст человека равен " + age + " он совершеннолетний.");
+        } else {
+            System.out.println("Возраст человека равен " + age + ". Возраст совершеннолетия еще не наступил, нужно немного подождать");
+        }
         System.out.println();
 
         // Task 2
-        System.out.println("ЗАДАЧА 2:");
-        float var1 = 27.12f;
-        System.out.println("Значение переменной var1 с типом float равно " + var1);
-        long var2 = 987_678_965_549L;
-        System.out.println("Значение переменной var2 с типом long равно " + var2);
-        float var3 = 2.786f;
-        System.out.println("Значение переменной var3 с типом float равно " + var3);
-        short var4 = 569;
-        System.out.println("Значение переменной var4 с типом short равно " + var4);
-        short var5 = -159;
-        System.out.println("Значение переменной var5 с типом short равно " + var5);
-        short var6 = 27897;
-        System.out.println("Значение переменной var6 с типом short равно " + var6);
-        byte var7 = 67;
-        System.out.println("Значение переменной var7 с типом byte равно " + var7);
+        System.out.println("TASK 2:");
+        int temp = 2;
+        if (temp < 5) {
+            System.out.println("На улице холодно, нужно надеть шапку");
+        } else if (temp == 5) {
+            System.out.println("На улице +5, шапка на ваше усмотрение");
+        } else {
+            System.out.println("Сегодня тепло, можно идти без шапки");
+        }
+
+        temp = 5;
+        if (temp < 5) {
+            System.out.println("На улице холодно, нужно надеть шапку");
+        } else if (temp == 5) {
+            System.out.println("На улице +5, шапка на ваше усмотрение");
+        } else
+        {
+            System.out.println("Сегодня тепло, можно идти без шапки");
+        }
+
+        temp = 7;
+        if (temp < 5) {
+            System.out.println("На улице холодно, нужно надеть шапку");
+        } else if (temp == 5) {
+            System.out.println("На улице +5, шапка на ваше усмотрение");
+        } else {
+            System.out.println("Сегодня тепло, можно идти без шапки");
+        }
         System.out.println();
 
         // Task 3
-        System.out.println("ЗАДАЧА 3:");
-        int teacherLP = 23;
-        int teacherAS = 27;
-        int teacherEA = 30;
-        int sumLists = 559;
-        int listsOnPerStud = sumLists / (teacherLP + teacherAS + teacherEA);
-        System.out.println("На каждого ученика рассчитано " + listsOnPerStud + " листов бумаги");
+        System.out.println("TASK 3:");
+        int speed = 55;
+
+        if (speed <= 60) {
+            System.out.println("Ваша скорость равна: " + speed + ". Превышения скорости нет. Можно ездить спокойно.");
+        } else {
+            System.out.println("Ваша скорость равна: " + speed + ". Скорость превышена. Придётся заплатить штраф.");
+        }
+
+        speed = 65;
+        if (speed <= 60) {
+            System.out.println("Ваша скорость равна: " + speed + ". Превышения скорости нет. Можно ездить спокойно.");
+        } else {
+            System.out.println("Ваша скорость равна: " + speed + ". Скорость превышена. Придётся заплатить штраф.");
+        }
         System.out.println();
 
         // Task 4
-        System.out.println("ЗАДАЧА 4:");
-        int performancePerMin = 8;
-        int minutesInHour = performancePerMin * 60;
-        int minutesInDay = minutesInHour * 24;
-        int minutesInMonth = minutesInDay * 30;
-        int performancePer2Min = performancePerMin * 2;
-        int performancePer20Min = performancePerMin * 20;
-        System.out.println("За 20 мин. машина произвела " + performancePer20Min + " штук бутылок");
-        System.out.println("За 1 день машина произвела " + minutesInDay + " штук бутылок");
-        int performancePer3Days = minutesInDay * 3;
-        System.out.println("За 3 дня машина произвела " + performancePer3Days + " штук бутылок");
-        System.out.println("За 1 месяц машина произвела " + minutesInMonth + " штук бутылок");
+        System.out.println("TASK 4:");
+        int ageHum = 1;
+
+        if (ageHum < 2) {
+            System.out.println("Возраст: " + ageHum + ". Человеку пора в ясли.");
+        } else if (ageHum >= 2 && ageHum <= 6) {
+            System.out.println("Возраст: " + ageHum + ". Человеку пора в детский сад.");
+        } else if (ageHum >= 7 && ageHum <= 17) {
+            System.out.println("Возраст: " + ageHum + ". Человеку пора в школу.");
+        } else if (ageHum >= 18 && ageHum <= 24) {
+            System.out.println("Возраст: " + ageHum + ". Человеку пора в университет.");
+        } else if (ageHum > 24) {
+            System.out.println("Возраст: " + ageHum + ". Человеку пора ходить на работу.");
+        }
+
+        ageHum = 3;
+        if (ageHum < 2) {
+            System.out.println("Возраст: " + ageHum + ". Человеку пора в ясли.");
+        } else if (ageHum >= 2 && ageHum <= 6) {
+            System.out.println("Возраст: " + ageHum + ". Человеку пора в детский сад.");
+        } else if (ageHum >= 7 && ageHum <= 17) {
+            System.out.println("Возраст: " + ageHum + ". Человеку пора в школу.");
+        } else if (ageHum >= 18 && ageHum <= 24) {
+            System.out.println("Возраст: " + ageHum + ". Человеку пора в университет.");
+        } else if (ageHum > 24) {
+            System.out.println("Возраст: " + ageHum + ". Человеку пора ходить на работу.");
+        }
+
+        ageHum = 9;
+        if (ageHum < 2) {
+            System.out.println("Возраст: " + ageHum + ". Человеку пора в ясли.");
+        } else if (ageHum >= 2 && ageHum <= 6) {
+            System.out.println("Возраст: " + ageHum + ". Человеку пора в детский сад.");
+        } else if (ageHum >= 7 && ageHum <= 17) {
+            System.out.println("Возраст: " + ageHum + ". Человеку пора в школу.");
+        } else if (ageHum >= 18 && ageHum <= 24) {
+            System.out.println("Возраст: " + ageHum + ". Человеку пора в университет.");
+        } else if (ageHum > 24) {
+            System.out.println("Возраст: " + ageHum + ". Человеку пора ходить на работу.");
+        }
+
+        ageHum = 20;
+        if (ageHum < 2) {
+            System.out.println("Возраст: " + ageHum + ". Человеку пора в ясли.");
+        } else if (ageHum >= 2 && ageHum <= 6) {
+            System.out.println("Возраст: " + ageHum + ". Человеку пора в детский сад.");
+        } else if (ageHum >= 7 && ageHum <= 17) {
+            System.out.println("Возраст: " + ageHum + ". Человеку пора в школу.");
+        } else if (ageHum >= 18 && ageHum <= 24) {
+            System.out.println("Возраст: " + ageHum + ". Человеку пора в университет.");
+        } else if (ageHum > 24) {
+            System.out.println("Возраст: " + ageHum + ". Человеку пора ходить на работу.");
+        }
+
+        ageHum = 27;
+        if (ageHum < 2) {
+            System.out.println("Возраст: " + ageHum + ". Человеку пора в ясли.");
+        } else if (ageHum >= 2 && ageHum <= 6) {
+            System.out.println("Возраст: " + ageHum + ". Человеку пора в детский сад.");
+        } else if (ageHum >= 7 && ageHum <= 17) {
+            System.out.println("Возраст: " + ageHum + ". Человеку пора в школу.");
+        } else if (ageHum >= 18 && ageHum <= 24) {
+            System.out.println("Возраст: " + ageHum + ". Человеку пора в университет.");
+        } else if (ageHum > 24) {
+            System.out.println("Возраст: " + ageHum + ". Человеку пора ходить на работу.");
+        }
         System.out.println();
 
         // Task 5
-        System.out.println("ЗАДАЧА 5:");
-        int whitePaintTins = 2;
-        int brownPaintTins = 4;
-        int tinsPerClass = whitePaintTins + brownPaintTins;
-        int sumTins = 120;
-        int classesOnSchool = sumTins / tinsPerClass;
-        int whiteTinsOnSchool = classesOnSchool * whitePaintTins;
-        int brownTinsOnSchool = classesOnSchool * brownPaintTins;
-        System.out.println("В школе, где " + classesOnSchool + " классов, нужно " + whiteTinsOnSchool + " банок белой краски и " + brownTinsOnSchool + " банок коричневой краски");
+        System.out.println("TASK 5:");
+        int ageChild = 3;
+        if (ageChild <= 5) {
+            System.out.println("Возраст ребёнка: " + ageChild + " лет. Ребёнку нельзя кататься на аттракционе.");
+        } else if (ageChild > 5 && ageChild <= 14) {
+            System.out.println("Возраст ребёнка: " + ageChild + " лет. Ребёнку можно кататься на аттракционе в сопровождении взрослого.");
+        } else if (ageChild > 14) {
+            System.out.println("Возраст ребёнка: " + ageChild + " лет. Ребёнку можно кататься на аттракционе без сопровождения взрослого.");
+        }
+
+        ageChild = 6;
+        if (ageChild <= 5) {
+            System.out.println("Возраст ребёнка: " + ageChild + " лет. Ребёнку нельзя кататься на аттракционе.");
+        } else if (ageChild > 5 && ageChild <= 14) {
+            System.out.println("Возраст ребёнка: " + ageChild + " лет. Ребёнку можно кататься на аттракционе в сопровождении взрослого.");
+        } else if (ageChild > 14) {
+            System.out.println("Возраст ребёнка: " + ageChild + " лет. Ребёнку можно кататься на аттракционе без сопровождения взрослого.");
+        }
+
+        ageChild = 15;
+        if (ageChild <= 5) {
+            System.out.println("Возраст ребёнка: " + ageChild + " лет. Ребёнку нельзя кататься на аттракционе.");
+        } else if (ageChild > 5 && ageChild <= 14) {
+            System.out.println("Возраст ребёнка: " + ageChild + " лет. Ребёнку можно кататься на аттракционе в сопровождении взрослого.");
+        } else if (ageChild > 14) {
+            System.out.println("Возраст ребёнка: " + ageChild + " лет. Ребёнку можно кататься на аттракционе без сопровождения взрослого.");
+        }
         System.out.println();
 
         // Task 6
-        System.out.println("ЗАДАЧА 6:");
-        int numBananas = 5;
-        int numMilk = 5;
-        int numIcecream = 2;
-        int numEggs = 4;
-        int weightBananas = 80;
-        int weightMilk = 105;
-        int weightIcecream = 100;
-        int weightEggs = 70;
-        int grPerKg = 1000;
-        float sumProductInGramms = numBananas * weightBananas + numMilk * weightMilk + numIcecream * weightIcecream + numEggs * weightEggs;
-        float sumProductInKilogramms = sumProductInGramms / grPerKg;
-        System.out.println("Вес спортзавтрака равен: " + sumProductInGramms + " грамм, или " + sumProductInKilogramms + " килограмм");
+        System.out.println("TASK 6:");
+        int carriagePassagesAll = 102;
+        int carriagePassagesSeat = 60;
+        int carriagePassagesStand = carriagePassagesAll - carriagePassagesSeat;
+        int seatsBusy = 15;
+        if (seatsBusy < carriagePassagesSeat) {
+            System.out.println("Занято мест: " + seatsBusy + ". В вагоне есть сидячие и стоячие места");
+        } else if (seatsBusy >= carriagePassagesSeat && seatsBusy <= carriagePassagesAll) {
+            System.out.println("Занято мест: " + seatsBusy + ". В вагоне нет сидячих, но есть стоячие места");
+        } else if (seatsBusy > carriagePassagesAll) {
+            System.out.println("Занято мест: " + seatsBusy + ". В вагоне нет мест");
+        }
+
+        seatsBusy = 65;
+        if (seatsBusy < carriagePassagesSeat) {
+            System.out.println("Занято мест: " + seatsBusy + ". В вагоне есть сидячие и стоячие места");
+        } else if (seatsBusy >= carriagePassagesSeat && seatsBusy <= carriagePassagesAll) {
+            System.out.println("Занято мест: " + seatsBusy + ". В вагоне нет сидячих, но есть стоячие места");
+        } else if (seatsBusy > carriagePassagesAll) {
+            System.out.println("Занято мест: " + seatsBusy + ". В вагоне нет мест");
+        }
+
+        seatsBusy = 103;
+        if (seatsBusy < carriagePassagesSeat) {
+            System.out.println("Занято мест: " + seatsBusy + ". В вагоне есть сидячие и стоячие места");
+        } else if (seatsBusy >= carriagePassagesSeat && seatsBusy <= carriagePassagesAll) {
+            System.out.println("Занято мест: " + seatsBusy + ". В вагоне нет сидячих, но есть стоячие места");
+        } else if (seatsBusy > carriagePassagesAll) {
+            System.out.println("Занято мест: " + seatsBusy + ". В вагоне нет мест");
+        }
         System.out.println();
 
         // Task 7
-        System.out.println("ЗАДАЧА 7:");
-        int weightGoal = 7000;
-        int lightJump = 250;
-        int hardJump = 500;
-        int daysForWeightLoseLight = weightGoal / lightJump;
-        int daysForWeightLoseHard = weightGoal / hardJump;
-        System.out.println("7кг сбрасывается: в лайт режиме " + daysForWeightLoseLight + " дней, в хард режиме " + daysForWeightLoseHard + " дней");
-        System.out.println();
+        System.out.println("TASK 7:");
+        int one = 10;
+        int two = 5;
+        int three = 2;
 
-        // Task 8
-        System.out.println("ЗАДАЧА 8:");
-        int salaryMasha = 67760;
-        int salaryDenis = 83690;
-        int salaryKristina = 76230;
-        float degOfIncr = 0.1f;
-        float salaryIncrMasha = salaryMasha * degOfIncr + salaryMasha;
-        float salaryIncrDenis = salaryDenis * degOfIncr + salaryDenis;
-        float salaryIncrKristina = salaryKristina * degOfIncr + salaryKristina;
-        float salaryDiffMasha = salaryIncrMasha - salaryMasha;
-        float salaryDiffDenis = salaryIncrDenis - salaryDenis;
-        float salaryDiffKristina = salaryIncrKristina - salaryKristina;
-        System.out.println("Доход Маши: " + salaryMasha + " рублей. Доход Маши после повышения: " + salaryIncrMasha + " рублей. Разница: " + salaryDiffMasha);
-        System.out.println("Доход Дениса: " + salaryDenis + " рублей. Доход Дениса после повышения: " + salaryIncrDenis + " рублей. Разница: " + salaryDiffDenis);
-        System.out.println("Доход Кристины: " + salaryKristina + " рублей. Доход Кристины после повышения: " + salaryIncrKristina + " рублей. Разница: " + salaryDiffKristina);
+        if (one > two && one > three) {
+            System.out.println("One: " + one + ", Two: " + two + ". Three: " + three + ". One is maximal number");
+        } else if (two > one && two > three) {
+            System.out.println("One: " + one + ", Two: " + two + ". Three: " + three + ". Two is maximal number");
+        } else if (three > one && three > two) {
+            System.out.println("One: " + one + ", Two: " + two + ". Three: " + three + ". Three is maximal number");
+        }
+
+        one = 10;
+        two = 15;
+        three = 12;
+
+        if (one > two && one > three) {
+            System.out.println("One: " + one + ", Two: " + two + ". Three: " + three + ". One is maximal number");
+        } else if (two > one && two > three) {
+            System.out.println("One: " + one + ", Two: " + two + ". Three: " + three + ". Two is maximal number");
+        } else if (three > one && three > two) {
+            System.out.println("One: " + one + ", Two: " + two + ". Three: " + three + ". Three is maximal number");
+        }
+
+        one = 2;
+        two = 10;
+        three = 25;
+
+        if (one > two && one > three) {
+            System.out.println("One: " + one + ", Two: " + two + ". Three: " + three + ". One is maximal number");
+        } else if (two > one && two > three) {
+            System.out.println("One: " + one + ", Two: " + two + ". Three: " + three + ". Two is maximal number");
+        } else if (three > one && three > two) {
+            System.out.println("One: " + one + ", Two: " + two + ". Three: " + three + ". Three is maximal number");
+        }
     }
 }
