@@ -47,14 +47,15 @@ public class Main {
         System.out.println("ЗАДАНИЕ 4:");
         char[] reverseFullName = { 'n', 'a', 'v', 'I', ' ', 'v', 'o', 'n', 'a', 'v', 'I'};
         int reverseFullNameLength = reverseFullName.length;
-        for (int outerIndex = 0; outerIndex < reverseFullNameLength; outerIndex++) {
-            char tempSymb = reverseFullName[0];
-            for (int innerIndex = 0; innerIndex < reverseFullNameLength - 1 - outerIndex; innerIndex++) {
-                reverseFullName[innerIndex] = reverseFullName[innerIndex + 1];
+        for (int index = reverseFullNameLength - 1; index >= 0; index--) {
+            if (index == reverseFullNameLength - 1) {
+                System.out.print("[");
             }
-            reverseFullName[reverseFullNameLength - 1 - outerIndex] = tempSymb;
+            System.out.print(reverseFullName[index]);
+            if (index == 0) {
+                System.out.print("]\n");
+            }
         }
-        System.out.println(Arrays.toString(reverseFullName));
         System.out.println();
     }
 }
