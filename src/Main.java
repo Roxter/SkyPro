@@ -19,7 +19,7 @@ public class Main {
         System.out.println("Book 3 description:\n\t" + book_3.toString());
         System.out.println("Book 4 description:\n\t" + book_4.toString());
         System.out.println("Book 2 equals Book 1:\n\t" + book_2.equals(book_1));
-        book_2.setYear(1609);
+        book_2.setYear(1609); 
         System.out.println("Book 2 description after change year:\n\t" + book_2.toString());
         System.out.println("Book 2 equals Book 1 after change year:\n\t" + book_2.equals(book_1));
         System.out.println("Book 2 equals Book 3:\n\t" + book_2.equals(book_3));
