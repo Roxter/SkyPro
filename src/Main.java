@@ -1,25 +1,32 @@
 public class Main {
-    public static Employee[] employeeStore= new Employee[10];
 
     public static void main(String[] args) {
+        // Task 1
+        System.out.println("INIT DATA OF TASK 1...");
+        Author author_1 = new Author("Mark", "Tven");
+        Book book_1 = new Book("Tom Soyer Adventures", author_1, 1876);
+        Author author_2 = new Author("Mark", "Tven");
+        Book book_2 = new Book("Tom Soyer Adventures", author_2, 1876);
+        Author author_3 = new Author("William", "Shakespeare");
+        Book book_3 = new Book("Sonet", author_3, 1619);
+        Author author_4 = new Author("William", "Shakespeare");
+        Book book_4 = new Book("Sonet", author_4, 1619);
 
-        employeeStore[0] = new Employee("Иванов Иван Иванович", 1, 15000);
-        employeeStore[1] = new Employee("Петров Петр Петрович", 3, 35000);
-        employeeStore[2] = new Employee("Крылов Сергей Иванович", 2, 105000);
-        employeeStore[3] = new Employee("Агуреев Константин Сергеевич", 5, 20000);
-        employeeStore[4] = new Employee("Султанов Александр Григорьевич", 2, 19000);
-        employeeStore[5] = new Employee("Соткин Павел Иванович", 4, 37800);
-        employeeStore[6] = new Employee("Игнатьев Александр Игоревич", 3, 44600);
-        employeeStore[7] = new Employee("Дулетов Ильшат Тагирович", 2, 75700);
-        employeeStore[8] = new Employee("Уральский Игорь Терентьевич", 1, 90000);
-        employeeStore[9] = new Employee("Кацурин Игорь Терентьевич", 4, 100000);
-
-        listAllEmployees();
+        // Check input data and methods of task 1
+        System.out.println("INPUT DATA INITIALIZED. \nCHECK INPUT DATA AND METHODS OF TASK 1...");
+        System.out.println("Book 1 description:\n\t" + book_1.toString());
+        System.out.println("Book 2 description:\n\t" + book_2.toString());
+        System.out.println("Book 3 description:\n\t" + book_3.toString());
+        System.out.println("Book 4 description:\n\t" + book_4.toString());
+        System.out.println("Book 2 equals Book 1:\n\t" + book_2.equals(book_1));
+        book_2.setYear(1609);
+        System.out.println("Book 2 description after change year:\n\t" + book_2.toString());
+        System.out.println("Book 2 equals Book 1 after change year:\n\t" + book_2.equals(book_1));
+        System.out.println("Book 2 equals Book 3:\n\t" + book_2.equals(book_3));
+        System.out.println("Book 2 hashcode:\n\t" + book_2.hashCode());
+        System.out.println("Author 1 equals Author 2:\n\t" + author_1.equals(author_2));
+        System.out.println("Author 2 equals Author 3:\n\t" + author_2.equals(author_3));
+        System.out.println();
     }
 
-    public static void listAllEmployees() {
-        for (Employee employee: employeeStore) {
-            System.out.println(employee.toString());
-        }
-    }
 }

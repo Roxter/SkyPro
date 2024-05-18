@@ -3,7 +3,7 @@ public class Book {
     private Author author;
     private int year;
 
-    Book(String name, Author author, int year) {
+    public Book(String name, Author author, int year) {
         this.name = name;
         this.author = author;
         this.year = year;
@@ -36,7 +36,7 @@ public class Book {
 
     @Override
     public boolean equals(Object obj) {
-        if (this.getClass() != obj.getClass()) {
+        if (obj == null || this.getClass() != obj.getClass()) {
             return false;
         }
         Book b2 = (Book) obj;
@@ -48,6 +48,6 @@ public class Book {
 
     @Override
     public int hashCode() {
-        return java.util.Objects.hash(name + author.getName() + author.getSurname() + year);
+        return java.util.Objects.hash(name, author.getName(), author.getSurname() + year);
     }
 }

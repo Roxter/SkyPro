@@ -2,7 +2,7 @@ public class Author {
     private String name;
     private String surname;
 
-    Author(String name, String surname) {
+    public Author(String name, String surname) {
         this.name = name;
         this.surname = surname;
     }
@@ -24,7 +24,7 @@ public class Author {
 
     @Override
     public boolean equals(Object obj) {
-        if (this.getClass() != obj.getClass()) {
+        if (obj == null || this.getClass() != obj.getClass()) {
             return false;
         }
         Author a2 = (Author) obj;
@@ -33,6 +33,6 @@ public class Author {
 
     @Override
     public int hashCode() {
-        return java.util.Objects.hash(name + surname);
+        return java.util.Objects.hash(name, surname);
     }
 }
