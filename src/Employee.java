@@ -1,10 +1,11 @@
 public class Employee {
     private String fname;
     private int departmentNum;
-    private int salary;
-    public static int id = 0;
+    private double salary;
+    public static int counter = 0;
+    public int id = counter++;
 
-    public Employee(String fname, int departmentNum, int salary) {
+    public Employee(String fname, int departmentNum, double salary) {
         this.fname = fname;
         this.departmentNum = departmentNum;
         this.salary = salary;
@@ -19,8 +20,20 @@ public class Employee {
         return departmentNum;
     }
 
-    public int getSalary() {
+    public double getSalary() {
         return salary;
+    }
+
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
+    public void setDepartmentNum(int departmentNum) {
+        this.departmentNum = departmentNum;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
     }
 
     @Override
