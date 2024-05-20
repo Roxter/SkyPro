@@ -1,9 +1,9 @@
 public class EmployeeBook {
-    private Employee[] employeeStore= new Employee[10];
+    private Employee[] employeeStore = new Employee[10];
 
     public void listAllEmployees() {
         System.out.println("Имеющиеся в компании сотрудники: ");
-        for (Employee emp: employeeStore) {
+        for (Employee emp : employeeStore) {
             if (emp != null) {
                 System.out.println(emp.toString());
             }
@@ -12,7 +12,7 @@ public class EmployeeBook {
 
     public double calcCostOnSalaryMonth() {
         double cost = 0;
-        for (Employee employee: employeeStore) {
+        for (Employee employee : employeeStore) {
             if (employee != null) {
                 cost += employee.getSalary();
             }
@@ -23,7 +23,7 @@ public class EmployeeBook {
     public Employee findMinEmplSalary() {
         double minSal = Double.MAX_VALUE;
         Employee minSalEmployee = null;
-        for (Employee employee: employeeStore) {
+        for (Employee employee : employeeStore) {
             if (employee != null) {
                 double currSal = employee.getSalary();
                 if (currSal < minSal) {
@@ -38,7 +38,7 @@ public class EmployeeBook {
     public Employee findMaxEmplSalary() {
         double maxSal = Double.MIN_VALUE;
         Employee maxSalEmployee = null;
-        for (Employee employee: employeeStore) {
+        for (Employee employee : employeeStore) {
             if (employee != null) {
                 double currSal = employee.getSalary();
                 if (currSal > maxSal) {
@@ -56,7 +56,7 @@ public class EmployeeBook {
 
     public void listAllFnameEmployees() {
         System.out.println("ФИО имеющихся в компании сотрудников:");
-        for (Employee employee: employeeStore) {
+        for (Employee employee : employeeStore) {
             if (employee != null) {
                 System.out.println(employee.getFname());
             }
@@ -157,7 +157,7 @@ public class EmployeeBook {
         } else if (depNum <= 0 || depNum > 5) {
             System.out.println("Введите корректный номер отдела");
         } else {
-            for (Employee employee: employeeStore) {
+            for (Employee employee : employeeStore) {
                 if (employee != null && employee.getDepartmentNum() == depNum) {
                     double empSalary = employee.getSalary();
                     double indexedEmpSalary = empSalary + empSalary * perDip * percent;
@@ -247,7 +247,7 @@ public class EmployeeBook {
     public boolean deleteEmployeeOnId(int id) {
         boolean isFoundNotNullCell = false;
         if (id < 0) {
-            System.out.println("Передан неверный ID. Запись найдена");
+            System.out.println("Передан неверный ID. Запись не найдена");
             return false;
         }
         for (int i = 0; i < employeeStore.length; i++) {

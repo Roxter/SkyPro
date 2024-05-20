@@ -23,7 +23,9 @@ public class Employee {
         return salary;
     }
 
-    public int getId() { return id; }
+    public int getId() {
+        return id;
+    }
 
     public void setFname(String fname) {
         this.fname = fname;
