@@ -2,14 +2,13 @@ public class Employee {
     private String fname;
     private int departmentNum;
     private double salary;
-    public static int counter = 0;
-    public int id = counter++;
+    private int id;
 
-    public Employee(String fname, int departmentNum, double salary) {
+    public Employee(String fname, int departmentNum, double salary, int id) {
         this.fname = fname;
         this.departmentNum = departmentNum;
         this.salary = salary;
-        id = id + 1;
+        this.id = id;
     }
 
     public String getFname() {
@@ -23,6 +22,8 @@ public class Employee {
     public double getSalary() {
         return salary;
     }
+
+    public int getId() { return id; }
 
     public void setFname(String fname) {
         this.fname = fname;
