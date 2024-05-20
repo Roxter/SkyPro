@@ -3,12 +3,9 @@ public class EmployeeBook {
 
     public void listAllEmployees() {
         System.out.println("Имеющиеся в компании сотрудники: ");
-        for (int i = 0; i < employeeStore.length; i++) {
-            if (employeeStore[i] == null) {
-                System.out.println("В хранилище под номером " + i + " ошибочная запись! Проверьте хранилище");
-                break;
-            } else {
-                System.out.println(employeeStore[i].toString());
+        for (Employee emp: employeeStore) {
+            if (emp != null) {
+                System.out.println(emp.toString());
             }
         }
     }
@@ -16,10 +13,7 @@ public class EmployeeBook {
     public double calcCostOnSalaryMonth() {
         double cost = 0;
         for (Employee employee: employeeStore) {
-            if (employee == null) {
-                System.out.println("В хранилище ошибочная запись");
-                return 0;
-            } else {
+            if (employee != null) {
                 cost += employee.getSalary();
             }
         }
@@ -30,10 +24,7 @@ public class EmployeeBook {
         double minSal = Double.MAX_VALUE;
         Employee minSalEmployee = null;
         for (Employee employee: employeeStore) {
-            if (employee == null) {
-                System.out.println("В хранилище ошибочная запись");
-                return null;
-            } else {
+            if (employee != null) {
                 double currSal = employee.getSalary();
                 if (currSal < minSal) {
                     minSal = currSal;
@@ -48,10 +39,7 @@ public class EmployeeBook {
         double maxSal = Double.MIN_VALUE;
         Employee maxSalEmployee = null;
         for (Employee employee: employeeStore) {
-            if (employee == null) {
-                System.out.println("В хранилище ошибочная запись");
-                return null;
-            } else {
+            if (employee != null) {
                 double currSal = employee.getSalary();
                 if (currSal > maxSal) {
                     maxSal = currSal;
@@ -67,12 +55,9 @@ public class EmployeeBook {
     }
 
     public void listAllFnameEmployees() {
-        System.out.println("ФИО имеющихся в компании сотрудников: ");
+        System.out.println("ФИО имеющихся в компании сотрудников:");
         for (Employee employee: employeeStore) {
-            if (employee == null) {
-                System.out.println("В хранилище ошибочная запись. Вывод сотрудников прерван");
-                break;
-            } else {
+            if (employee != null) {
                 System.out.println(employee.getFname());
             }
         }
@@ -80,36 +65,32 @@ public class EmployeeBook {
 
     public void indexSalary(double percent) {
         double perDip = 0.01;
-        for (Employee employee: employeeStore) {
-            if (employee == null) {
-                System.out.println("В хранилище ошибочная запись");
-                break;
-            } else if (percent <= 0) {
-                System.out.println("Введите корректный процент прироста");
-                break;
+        if (percent <= 0) {
+            System.out.println("Введите корректный процент прироста");
+        } else {
+            for (Employee employee : employeeStore) {
+                if (employee != null) {
+                    double empSalary = employee.getSalary();
+                    double indexedEmpSalary = empSalary + empSalary * perDip * percent;
+                    employee.setSalary(indexedEmpSalary);
+                }
             }
-            double empSalary = employee.getSalary();
-            double indexedEmpSalary = empSalary + empSalary * perDip * percent;
-            employee.setSalary(indexedEmpSalary);
         }
     }
 
     public Employee findMinEmplSalaryOnDep(int depNum) {
         double minSal = Double.MAX_VALUE;
         Employee minSalEmployee = null;
-        for (Employee employee: employeeStore) {
-            if (employee == null) {
-                System.out.println("В хранилище ошибочная запись");
-                return null;
-            } else {
-                double currSal = employee.getSalary();
-                if (depNum <= 0 || depNum > 5) {
-                    System.out.println("Введите корректный номер отдела");
-                    break;
-                }
-                if (currSal < minSal && employee.getDepartmentNum() == depNum) {
-                    minSal = currSal;
-                    minSalEmployee = employee;
+        if (depNum <= 0 || depNum > 5) {
+            System.out.println("Введите корректный номер отдела");
+        } else {
+            for (Employee employee : employeeStore) {
+                if (employee != null) {
+                    double currSal = employee.getSalary();
+                    if (currSal < minSal && employee.getDepartmentNum() == depNum) {
+                        minSal = currSal;
+                        minSalEmployee = employee;
+                    }
                 }
             }
         }
@@ -119,19 +100,16 @@ public class EmployeeBook {
     public Employee findMaxEmplSalaryOnDep(int depNum) {
         double maxSal = Double.MIN_VALUE;
         Employee maxSalEmployee = null;
-        for (Employee employee: employeeStore) {
-            if (employee == null) {
-                System.out.println("В хранилище ошибочная запись");
-                return null;
-            } else {
-                double currSal = employee.getSalary();
-                if (depNum <= 0 || depNum > 5) {
-                    System.out.println("Введите корректный номер отдела");
-                    return null;
-                }
-                if (currSal > maxSal && employee.getDepartmentNum() == depNum) {
-                    maxSal = currSal;
-                    maxSalEmployee = employee;
+        if (depNum <= 0 || depNum > 5) {
+            System.out.println("Введите корректный номер отдела");
+        } else {
+            for (Employee employee : employeeStore) {
+                if (employee != null) {
+                    double currSal = employee.getSalary();
+                    if (currSal > maxSal && employee.getDepartmentNum() == depNum) {
+                        maxSal = currSal;
+                        maxSalEmployee = employee;
+                    }
                 }
             }
         }
@@ -140,17 +118,15 @@ public class EmployeeBook {
 
     public double calcCostOnSalaryMonthOnDep(double depNum) {
         double cost = 0;
-        for (Employee employee : employeeStore) {
-            if (employee == null) {
-                System.out.println("В хранилище ошибочная запись");
-                return 0;
-            }
-            if (depNum <= 0 || depNum > 5) {
-                System.out.println("Введите корректный номер отдела");
-                return 0;
-            }
-            if (employee.getDepartmentNum() == depNum) {
-                cost += employee.getSalary();
+        if (depNum <= 0 || depNum > 5) {
+            System.out.println("Введите корректный номер отдела");
+        } else {
+            for (Employee employee : employeeStore) {
+                if (employee != null) {
+                    if (employee.getDepartmentNum() == depNum) {
+                        cost += employee.getSalary();
+                    }
+                }
             }
         }
         return cost;
@@ -158,15 +134,13 @@ public class EmployeeBook {
 
     public int countEmpsOnDep(int depNum) {
         int cntrEmpsOnDep = 0;
-        for (Employee employee : employeeStore) {
-            if (depNum <= 0 || depNum > 5) {
-                System.out.println("Введите корректный номер отдела");
-                return 0;
-            } else if (employee == null) {
-                System.out.println("В хранилище ошибочная запись");
-                return 0;
-            } else if (employee.getDepartmentNum() == depNum) {
-                cntrEmpsOnDep++;
+        if (depNum <= 0 || depNum > 5) {
+            System.out.println("Введите корректный номер отдела");
+        } else {
+            for (Employee employee : employeeStore) {
+                if (employee != null && employee.getDepartmentNum() == depNum) {
+                    cntrEmpsOnDep++;
+                }
             }
         }
         return cntrEmpsOnDep;
@@ -178,35 +152,30 @@ public class EmployeeBook {
 
     public void indexSalaryOnDep(double percent, int depNum) {
         double perDip = 0.01;
-        for (Employee employee: employeeStore) {
-            if (employee == null) {
-                System.out.println("В хранилище ошибочная запись");
-                break;
-            } else if (percent <= 0) {
-                System.out.println("Введите корректный процент прироста");
-                break;
-            } else if (depNum <= 0 || depNum > 5) {
-                System.out.println("Введите корректный номер отдела");
-                break;
-            } else if (employee.getDepartmentNum() == depNum) {
-                double empSalary = employee.getSalary();
-                double indexedEmpSalary = empSalary + empSalary * perDip * percent;
-                employee.setSalary(indexedEmpSalary);
+        if (percent <= 0) {
+            System.out.println("Введите корректный процент прироста");
+        } else if (depNum <= 0 || depNum > 5) {
+            System.out.println("Введите корректный номер отдела");
+        } else {
+            for (Employee employee: employeeStore) {
+                if (employee != null && employee.getDepartmentNum() == depNum) {
+                    double empSalary = employee.getSalary();
+                    double indexedEmpSalary = empSalary + empSalary * perDip * percent;
+                    employee.setSalary(indexedEmpSalary);
+                }
             }
         }
     }
 
     public void listAllEmployeesExclDep(int depNum) {
         System.out.println("Данные имеющихся в компании сотрудников отдела " + depNum + ":");
-        for (Employee employee: employeeStore) {
-            if (employee == null) {
-                System.out.println("В хранилище ошибочная запись. Вывод сотрудников прерван");
-                break;
-            } else if (depNum <= 0 || depNum > 5) {
-                System.out.println("Введите корректный номер отдела");
-                break;
-            } else if (employee.getDepartmentNum() == depNum) {
-                System.out.printf("%s, зарплата %.0f\n", employee.getFname(), employee.getSalary());
+        if (depNum <= 0 || depNum > 5) {
+            System.out.println("Введите корректный номер отдела");
+        } else {
+            for (Employee employee : employeeStore) {
+                if (employee != null && employee.getDepartmentNum() == depNum) {
+                    System.out.printf("%s, зарплата %.0f\n", employee.getFname(), employee.getSalary());
+                }
             }
         }
     }
@@ -214,40 +183,36 @@ public class EmployeeBook {
     public void listAllEmployeesLessSal(double maxSalary) {
         int cntrEmp = 0;
         System.out.println("Данные имеющихся в компании с зарплатой меньше " + maxSalary + ":");
-        for (Employee employee: employeeStore) {
-            if (employee == null) {
-                System.out.println("В хранилище ошибочная запись. Вывод сотрудников прерван");
-                break;
-            } else if (maxSalary <= 0) {
-                System.out.println("Введите зарплату больше нуля");
-                break;
-            } else if (employee.getSalary() < maxSalary) {
-                System.out.printf("ID %d %s, зарплата %.0f\n", employee.getId(), employee.getFname(), employee.getSalary());
-                cntrEmp++;
+        if (maxSalary <= 0) {
+            System.out.println("Введите зарплату больше нуля");
+        } else {
+            for (Employee employee : employeeStore) {
+                if (employee != null && employee.getSalary() < maxSalary) {
+                    System.out.printf("ID %d %s, зарплата %.0f\n", employee.getId(), employee.getFname(), employee.getSalary());
+                    cntrEmp++;
+                }
             }
-        }
-        if (cntrEmp <= 0) {
-            System.out.println("Сотрудники с зарплатой меньше " + maxSalary + " не найдены");
+            if (cntrEmp <= 0) {
+                System.out.println("Сотрудники с зарплатой меньше " + maxSalary + " не найдены");
+            }
         }
     }
 
     public void listAllEmployeesMoreSal(double minSalary) {
         int cntrEmp = 0;
         System.out.println("Данные имеющихся в компании с зарплатой больше " + minSalary + ":");
-        for (Employee employee: employeeStore) {
-            if (employee == null) {
-                System.out.println("В хранилище ошибочная запись. Вывод сотрудников прерван");
-                break;
-            } else if (minSalary <= 0) {
-                System.out.println("Введите зарплату больше нуля");
-                break;
-            } else if (employee.getSalary() >= minSalary) {
-                System.out.printf("ID %d %s, зарплата %.0f\n", employee.getId(), employee.getFname(), employee.getSalary());
-                cntrEmp++;
+        if (minSalary <= 0) {
+            System.out.println("Введите зарплату больше нуля");
+        } else {
+            for (Employee employee : employeeStore) {
+                if (employee != null && employee.getSalary() >= minSalary) {
+                    System.out.printf("ID %d %s, зарплата %.0f\n", employee.getId(), employee.getFname(), employee.getSalary());
+                    cntrEmp++;
+                }
             }
-        }
-        if (cntrEmp <= 0) {
-            System.out.println("Сотрудники с зарплатой больше или равно " + minSalary + " не найдены");
+            if (cntrEmp <= 0) {
+                System.out.println("Сотрудники с зарплатой больше или равно " + minSalary + " не найдены");
+            }
         }
     }
 
