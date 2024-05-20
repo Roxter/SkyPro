@@ -3,7 +3,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        employeeStore[0] = new Employee("Иванов Иван Иванович", 1, 65000);
+        employeeStore[0] = new Employee("Иванов Иван Иванович ", 1, 65000);
         employeeStore[1] = new Employee("Петров Петр Петрович", 3, 35000);
         employeeStore[2] = new Employee("Крылов Сергей Иванович", 2, 105000);
         employeeStore[3] = new Employee("Агуреев Константин Сергеевич", 5, 20000);
