@@ -7,6 +7,7 @@ public class Main {
     }
 
     private static void changeValue(Integer[] value) {
-        value = new Integer[] {1, 2};
+        System.out.println(value[1]);
+        value[0] = 99;
     }
 }
