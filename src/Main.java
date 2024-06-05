@@ -1,9 +1,12 @@
 public class Main {
 
     public static void main(String[] args) {
-        // Task 1
-        System.out.println("ЗАДАЧА 1:");
+        int value = 33;
+        changeValue(value);
+        System.out.println(value);
+    }
 
-        System.out.println();
+    private static void changeValue(Integer value) {
+        value = 22;
     }
 }
