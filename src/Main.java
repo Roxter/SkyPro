@@ -1,13 +1,16 @@
 public class Main {
 
     public static void main(String[] args) {
-        Integer[] value = new Integer[] {3, 4};
-        changeValue(value);
-        System.out.println(value[0] + " " + value[1]);
+        Person person = new Person();
+        person.name = "Lyapis";
+        person.surname = "Trubetskoy";
+        changePerson(person);
+        System.out.println(person.toString());
     }
 
-    private static void changeValue(Integer[] value) {
-        System.out.println(value[1]);
-        value[0] = 99;
+    private static void changePerson(Person person) {
+        person = new Person();
+        person.name = "Ilya";
+        person.surname = "Lagutenko";
     }
 }
