@@ -9,7 +9,6 @@ public class Main {
     }
 
     private static void changePerson(Person person) {
-        person = new Person();
         person.name = "Ilya";
         person.surname = "Lagutenko";
     }
