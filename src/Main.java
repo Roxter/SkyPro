@@ -18,7 +18,8 @@ public class Main {
         for (SchoolHogwarts stud:studentsHogwarts) {
             System.out.println(stud.toString());
         }
-        studentsHogwarts[3].isEqual()
+        studentsHogwarts[3].isEqual(studentsHogwarts[4]);
         System.out.println();
     }
+
 }
