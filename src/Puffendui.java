@@ -45,4 +45,19 @@ public class Puffendui extends SchoolHogwarts {
                 ", transgression=" + super.getTransgression() +
                 '}';
     }
+
+    @Override
+    public void isEqual(Puffendui student) {
+        int sumThisStud = this.industry + this.loyality + this.integrity;
+        //if (this.getClass() != student.getClass()) {
+        int sumAcceptedStud = student.getIndustry() + student.getLoyality() + student.getIntegrity();
+        if (sumThisStud == sumAcceptedStud) {
+            System.out.println(student.getName() + " и " + this.getName() + " по баллам в Пуффендуе равны");
+        } else if (sumThisStud <= sumAcceptedStud) {
+            System.out.println(student.getName() + " лучший Пуффендуец, чем " + this.getName());
+        } else {
+            System.out.println(this.getName() + " лучший Пуффендуец, чем " + student.getName());
+        }
+        //}
+    }
 }

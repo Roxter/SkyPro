@@ -56,4 +56,19 @@ public class Kogtevran extends SchoolHogwarts {
                 ", transgression=" + super.getTransgression() +
                 '}';
     }
+
+    @Override
+    public void isEqual(Kogtevran student) {
+        int sumThisStud = this.intellligence + this.wisdom + this.brillience + this.creativity;
+        //if (this.getClass() != student.getClass()) {
+        int sumAcceptedStud = student.getIntellligence() + student.getWisdom() + student.getCreativity();
+        if (sumThisStud == sumAcceptedStud) {
+            System.out.println(student.getName() + " и " + this.getName() + " по баллам в Когтеквране равны");
+        } else if (sumThisStud <= sumAcceptedStud) {
+            System.out.println(student.getName() + " лучший Когтевранец, чем " + this.getName());
+        } else {
+            System.out.println(this.getName() + " лучший Когтевранец, чем " + student.getName());
+        }
+        //}
+    }
 }
