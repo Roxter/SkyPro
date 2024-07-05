@@ -46,18 +46,23 @@ public class Griffendor extends SchoolHogwarts {
                 '}';
     }
 
-    @Override
-    public void isEqual(Griffendor student) {
+    public void compare(SchoolHogwarts student) {
+        if (student instanceof Griffendor) {
+            isEqual((Griffendor) student);
+        } else {
+            System.out.println("Ошибка сравнения. Выберите студентов из одного факультета");
+        }
+    }
+
+    private void isEqual(Griffendor student) {
         int sumThisStud = this.nobility + this.honor + this.bravery;
-        //if (this.getClass() != student.getClass()) {
-        int sumAcceptedStud = student.getNobility() + student.getHonor() + student.getBravery();
+        int sumAcceptedStud = student.getBravery() + student.getHonor() + student.getNobility();
         if (sumThisStud == sumAcceptedStud) {
             System.out.println(student.getName() + " и " + this.getName() + " по баллам в Гриффендоре равны");
         } else if (sumThisStud <= sumAcceptedStud) {
-            System.out.println(student.getName() + " лучший Гриффиндорец, чем " + this.getName());
+            System.out.println(student.getName() + " лучший Гриффендорец, чем " + this.getName());
         } else {
-            System.out.println(this.getName() + " лучший Гриффиндорец, чем " + student.getName());
+            System.out.println(this.getName() + " лучший Гриффендорец, чем " + student.getName());
         }
-        //}
     }
 }

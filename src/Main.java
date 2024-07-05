@@ -18,12 +18,16 @@ public class Main {
         for (SchoolHogwarts stud:studentsHogwarts) {
             System.out.println(stud.toString());
         }
-        studentsHogwarts[3].isEqual(studentsHogwarts[4]);
-        System.out.println();
+        studentsHogwarts[3].compare(studentsHogwarts[4]);
+        studentsHogwarts[5].compare(studentsHogwarts[6]);
+        studentsHogwarts[0].compare(studentsHogwarts[1]);
+        studentsHogwarts[3].compare(studentsHogwarts[4]);
+        studentsHogwarts[6].compare(studentsHogwarts[7]);
+        studentsHogwarts[10].compare(studentsHogwarts[11]);
+        studentsHogwarts[3].compareForParent(studentsHogwarts[4]);
+        studentsHogwarts[5].compareForParent(studentsHogwarts[6]);
+        studentsHogwarts[0].compareForParent(studentsHogwarts[1]);
+        studentsHogwarts[6].compareForParent(studentsHogwarts[7]);
     }
-
-    /*public static void isEqual(SchoolHogwarts student) {
-        student.isEqual();
-    }*/
 
 }

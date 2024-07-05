@@ -68,10 +68,16 @@ public class Slizerin extends SchoolHogwarts {
                 '}';
     }
 
-    @Override
-    public void isEqual(Slizerin student) {
+    public void compare(SchoolHogwarts student) {
+        if (student instanceof Slizerin) {
+            isEqual((Slizerin) student);
+        } else {
+            System.out.println("Ошибка сравнения. Выберите студентов из одного факультета");
+        }
+    }
+
+    private void isEqual(Slizerin student) {
         int sumThisStud = this.trick + this.decision + this.ambition + this.resource + this.lustToPower;
-        //if (this.getClass() != student.getClass()) {
         int sumAcceptedStud = student.getTrick() + student.getDecision() + student.getAmbition() + student.getLustToPower();
         if (sumThisStud == sumAcceptedStud) {
             System.out.println(student.getName() + " и " + this.getName() + " по баллам в Слизерине равны");
@@ -80,6 +86,5 @@ public class Slizerin extends SchoolHogwarts {
         } else {
             System.out.println(this.getName() + " лучший Слизеринец, чем " + student.getName());
         }
-        //}
     }
 }

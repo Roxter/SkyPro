@@ -46,11 +46,17 @@ public class Puffendui extends SchoolHogwarts {
                 '}';
     }
 
-    @Override
-    public void isEqual(Puffendui student) {
+    public void compare(SchoolHogwarts student) {
+        if (student instanceof Puffendui) {
+            isEqual((Puffendui) student);
+        } else {
+            System.out.println("Ошибка сравнения. Выберите студентов из одного факультета");
+        }
+    }
+
+    private void isEqual(Puffendui student) {
         int sumThisStud = this.industry + this.loyality + this.integrity;
-        //if (this.getClass() != student.getClass()) {
-        int sumAcceptedStud = student.getIndustry() + student.getLoyality() + student.getIntegrity();
+        int sumAcceptedStud = student.getIndustry() + student.getIntegrity() + student.getLoyality();
         if (sumThisStud == sumAcceptedStud) {
             System.out.println(student.getName() + " и " + this.getName() + " по баллам в Пуффендуе равны");
         } else if (sumThisStud <= sumAcceptedStud) {
@@ -58,6 +64,5 @@ public class Puffendui extends SchoolHogwarts {
         } else {
             System.out.println(this.getName() + " лучший Пуффендуец, чем " + student.getName());
         }
-        //}
     }
 }

@@ -21,7 +21,19 @@ public abstract class SchoolHogwarts {
         return transgression;
     }
 
-    public abstract void isEqual();
+    public abstract void compare(SchoolHogwarts student);
+
+    public void compareForParent(SchoolHogwarts student) {
+        int sumThisStud = this.magic + this.transgression;
+        int sumAcceptedStud = student.getMagic() + student.getTransgression();
+        if (sumThisStud == sumAcceptedStud) {
+            System.out.println(student.getName() + " и " + this.getName() + " по баллам в Хогвартсе равны");
+        } else if (sumThisStud <= sumAcceptedStud) {
+            System.out.println(student.getName() + " обладает бОльшей мощностью магии, чем " + this.getName());
+        } else {
+            System.out.println(this.getName() + " обладает бОльшей мощностью магии, чем " + student.getName());
+        }
+    }
 }
 
 // Класс становится абстрактным когда у него появляется абстрактный метод. До этого он просто наследуемый.
