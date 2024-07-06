@@ -1,14 +1,20 @@
 package pro.sky.java.homeworks.course2.lesson1;
 
 public class Main {
-    private static Car[] carstore = new Car[2];
-    private static Truck[] truckstore = new Truck[2];
-    private static Bicycle[] bicyclestore = new Bicycle[2];
+    protected static Car[] carstore = new Car[2];
+    protected static Truck[] truckstore = new Truck[2];
+    protected static Bicycle[] bicyclestore = new Bicycle[2];
 
     public static void main(String[] args) {
+        carstore = {
+                new Car(),
+                new Car()
+        }
+        Car car2 = new Car();
         Car car = carstore[0];
         Car car2 = carstore[1];
-        car.setModelName("car1");
+        carstore[1].setModelName("tryt");
+        /*car.setModelName("car1");
         car2.setModelName("car2");
         car.setWheelsCount(4);
         car2.setWheelsCount(4);
@@ -32,7 +38,7 @@ public class Main {
         check(bicycle);
         check(bicycle2);
         check(truck);
-        check(truck2);
+        check(truck2);*/
     }
 
     public static void check(Bicycle bicycle) {

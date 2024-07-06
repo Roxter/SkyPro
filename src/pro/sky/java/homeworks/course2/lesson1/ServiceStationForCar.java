@@ -1,11 +1,6 @@
 package pro.sky.java.homeworks.course2.lesson1;
 
 public class ServiceStationForCar extends ServiceStation {
-    Car car;
-
-    void ServiceStationForCar() {
-        car = new Car();
-    }
 
     @Override
     public void startService(Transport transport) {
@@ -13,7 +8,7 @@ public class ServiceStationForCar extends ServiceStation {
     }
 
     protected boolean runProcess(Transport transport) {
-        car = (Car) transport;
+        Car car = (Car) transport;
         for (int wheelNum = 1; wheelNum <= car.wheelsCount; wheelNum++) {
             updateTyre(car, wheelNum);
         }
@@ -27,9 +22,5 @@ public class ServiceStationForCar extends ServiceStation {
 
     private void checkEngine(Car car) {
         System.out.println("Проверяем двигатель");
-    }
-
-    private void checkTrailer(Car car) {
-        System.out.println("Проверяем прицеп");
     }
 }

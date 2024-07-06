@@ -1,11 +1,6 @@
 package pro.sky.java.homeworks.course2.lesson1;
 
 public class ServiceStationForBicycle extends ServiceStation {
-    Bicycle bicycle;
-
-    void ServiceStationForBicycle() {
-        bicycle = new Bicycle();
-    }
 
     @Override
     public void startService(Transport transport) {
@@ -13,7 +8,7 @@ public class ServiceStationForBicycle extends ServiceStation {
     }
 
     protected boolean runProcess(Transport transport) {
-        bicycle = (Bicycle) transport;
+        Bicycle bicycle = (Bicycle) transport;
         for (int wheelNum = 1; wheelNum <= bicycle.wheelsCount; wheelNum++) {
             updateTyre(bicycle, wheelNum);
         }
