@@ -1,6 +1,6 @@
 package pro.sky.java.homeworks.course2.lesson1;
 
-public abstract class WheeledTransport {
+public abstract class Transport {
     protected String modelName;
     protected int wheelsCount;
 

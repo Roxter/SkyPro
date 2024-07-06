@@ -35,30 +35,33 @@ public class Main {
         check(truck2);
     }
 
-    public static void check(Car car) {
-        if (car != null) {
-            System.out.println("Обслуживаем " + car.modelName);
-            ServiceStation station = new ServiceStation();
-            station.startService(car);
+    public static void check(Bicycle bicycle) {
+        ServiceStation service = new ServiceStationForBicycle();
+
+        if (bicycle != null) {
+            service.startService(bicycle);
+        } else {
+            System.out.println("Передан отсутствующий объект");
         }
     }
 
-    public static void check(Bicycle bicycle) {
-        if (bicycle != null) {
-            System.out.println("Обслуживаем " + bicycle.modelName);
-            for (int i = 0; i < bicycle.wheelsCount; i++) {
-                bicycle.updateTyre();
-            }
+    public static void check(Car car) {
+        ServiceStation service = new ServiceStationForCar();
+
+        if (car != null) {
+            service.startService(car);
+        } else {
+            System.out.println("Передан отсутствующий объект");
         }
     }
 
     public static void check(Truck truck) {
-        else if (truck != null) {
-            System.out.println("Обслуживаем " + truck.modelName);
-            for (int i = 0; i < truck.wheelsCount; i++) {
-                truck.updateTyre();
-            }
-            truck.checkEngine();
-            truck.checkTrailer();
+        ServiceStation service = new ServiceStationForTruck();
+
+        if (truck != null) {
+            service.startService(truck);
+        } else {
+            System.out.println("Передан отсутствующий объект");
+        }
     }
 }
