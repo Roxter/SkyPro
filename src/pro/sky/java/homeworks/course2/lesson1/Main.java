@@ -6,28 +6,22 @@ public class Main {
     protected static Bicycle[] bicyclestore = new Bicycle[2];
 
     public static void main(String[] args) {
-        carstore = {
-                new Car(),
-                new Car()
-        }
-        Car car2 = new Car();
-        Car car = carstore[0];
-        Car car2 = carstore[1];
-        carstore[1].setModelName("tryt");
-        /*car.setModelName("car1");
+        Car car = carstore[0] = new Car();
+        Car car2 = carstore[1] = new Car();
+        car.setModelName("car1");
         car2.setModelName("car2");
         car.setWheelsCount(4);
         car2.setWheelsCount(4);
 
-        Truck truck = truckstore[0];
-        Truck truck2 = truckstore[1];
+        Truck truck = truckstore[0] = new Truck();
+        Truck truck2 = truckstore[1] = new Truck();
         truck.setModelName("truck1");
         truck2.setModelName("truck2");
         truck.setWheelsCount(6);
         truck2.setWheelsCount(8);
 
-        Bicycle bicycle = bicyclestore[0];
-        Bicycle bicycle2 = bicyclestore[1];
+        Bicycle bicycle = bicyclestore[0] = new Bicycle();
+        Bicycle bicycle2 = bicyclestore[1] = new Bicycle();
         bicycle.setModelName("bicycle1");
         bicycle2.setModelName("bicycle2");
         bicycle.setWheelsCount(2);
@@ -38,7 +32,7 @@ public class Main {
         check(bicycle);
         check(bicycle2);
         check(truck);
-        check(truck2);*/
+        check(truck2);
     }
 
     public static void check(Bicycle bicycle) {
