@@ -1,9 +1,12 @@
 package pro.sky.java.homeworks.course2.lesson1;
 
-public abstract class ServiceStation {
+public class ServiceStation {
+
+    private ServiceStationForTransport serviceStationForTransport;
+
     public void startService(Transport transport) {
         System.out.println("Обслуживаем средство " + transport.modelName);
-        boolean resultOfService = runProcess(transport);
+        boolean resultOfService = serviceStationForTransport.runProcess(transport);
         if (resultOfService) {
             System.out.println("Обслуживание средства " + transport.modelName + " завершено.\n");
         } else {
@@ -11,5 +14,33 @@ public abstract class ServiceStation {
         }
     }
 
-    protected abstract boolean runProcess(Transport transport);
+    public void check(Bicycle bicycle) {
+        serviceStationForTransport = new ServiceStationForBicycle();
+
+        if (bicycle != null) {
+            startService(bicycle);
+        } else {
+            System.out.println("Передан отсутствующий объект");
+        }
+    }
+
+    public void check(Car car) {
+        serviceStationForTransport = new ServiceStationForCar();
+
+        if (car != null) {
+            startService(car);
+        } else {
+            System.out.println("Передан отсутствующий объект");
+        }
+    }
+
+    public void check(Truck truck) {
+        serviceStationForTransport = new ServiceStationForTruck();
+
+        if (truck != null) {
+            startService(truck);
+        } else {
+            System.out.println("Передан отсутствующий объект");
+        }
+    }
 }

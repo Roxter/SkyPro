@@ -1,13 +1,8 @@
 package pro.sky.java.homeworks.course2.lesson1;
 
-public class ServiceStationForBicycle extends ServiceStation {
+public class ServiceStationForBicycle implements ServiceStationForTransport{
 
-    @Override
-    public void startService(Transport transport) {
-        super.startService(transport);
-    }
-
-    protected boolean runProcess(Transport transport) {
+    public boolean runProcess(Transport transport) {
         Bicycle bicycle = (Bicycle) transport;
         for (int wheelNum = 1; wheelNum <= bicycle.wheelsCount; wheelNum++) {
             updateTyre(bicycle, wheelNum);
