@@ -2,45 +2,25 @@ package pro.sky.java.homeworks.course2.lesson1;
 
 public class ServiceStation {
 
-    private ServiceStationForTransport serviceStationForTransport;
-
-    public void startService(Transport transport) {
-        System.out.println("Обслуживаем средство " + transport.modelName);
-        boolean resultOfService = serviceStationForTransport.runProcess(transport);
+    public void service(ServiceKit serviceKit) {
+        System.out.println("Обслуживаем средство " + serviceKit.modelName);
+        boolean resultOfService = serviceKit.serviceMe();
         if (resultOfService) {
-            System.out.println("Обслуживание средства " + transport.modelName + " завершено.\n");
+            System.out.println("Обслуживание средства " + serviceKit.modelName + " завершено.\n");
         } else {
-            System.out.println("В обслуживании средства " + transport.modelName + " произошла проблема. Повторите сервис.\n");
+            System.out.println("В обслуживании средства " + serviceKit.modelName + " произошла проблема. Повторите сервис.\n");
         }
     }
 
-    public void check(Bicycle bicycle) {
-        serviceStationForTransport = new ServiceStationForBicycle();
-
-        if (bicycle != null) {
-            startService(bicycle);
-        } else {
-            System.out.println("Передан отсутствующий объект");
-        }
+    public void checkTransport(Bicycle bicycle) {
+        service(bicycle);
     }
 
-    public void check(Car car) {
-        serviceStationForTransport = new ServiceStationForCar();
-
-        if (car != null) {
-            startService(car);
-        } else {
-            System.out.println("Передан отсутствующий объект");
-        }
+    public void checkTransport(Car car) {
+        service(car);
     }
 
-    public void check(Truck truck) {
-        serviceStationForTransport = new ServiceStationForTruck();
-
-        if (truck != null) {
-            startService(truck);
-        } else {
-            System.out.println("Передан отсутствующий объект");
-        }
+    public void checkTransport(Truck truck) {
+        service(truck);
     }
 }

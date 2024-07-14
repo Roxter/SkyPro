@@ -28,11 +28,11 @@ public class Main {
         bicycle2.setWheelsCount(2);
 
         ServiceStation serviceStation = new ServiceStation();
-        serviceStation.check(car);
-        serviceStation.check(car2);
-        serviceStation.check(bicycle);
-        serviceStation.check(bicycle2);
-        serviceStation.check(truck);
-        serviceStation.check(truck2);
+        serviceStation.checkTransport(car);
+        serviceStation.checkTransport(car2);
+        serviceStation.checkTransport(bicycle);
+        serviceStation.checkTransport(bicycle2);
+        serviceStation.checkTransport(truck);
+        serviceStation.checkTransport(truck2);
     }
 }
