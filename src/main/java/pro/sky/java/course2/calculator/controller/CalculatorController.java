@@ -23,7 +23,7 @@ public class CalculatorController {
 
     @GetMapping("plus")
     public String calcPlus(@RequestParam(value = "num1", required = false) String num1Str,
-                            @RequestParam(value = "num2", required = false) String num2Str) {
+                           @RequestParam(value = "num2", required = false) String num2Str) {
         if (num1Str == null || num2Str == null) {
             return "Введите два параметра";
         }
@@ -33,7 +33,7 @@ public class CalculatorController {
 
     @GetMapping("/minus")
     public String calcMinus(@RequestParam(value = "num1", required = false) String num1Str,
-                           @RequestParam(value = "num2", required = false) String num2Str) {
+                            @RequestParam(value = "num2", required = false) String num2Str) {
         if (num1Str == null || num2Str == null) {
             return "Введите два параметра";
         }
@@ -43,7 +43,7 @@ public class CalculatorController {
 
     @GetMapping("/multiple")
     public String calcMultiple(@RequestParam(value = "num1", required = false) String num1Str,
-                           @RequestParam(value = "num2", required = false) String num2Str) {
+                               @RequestParam(value = "num2", required = false) String num2Str) {
         if (num1Str == null || num2Str == null) {
             return "Введите два параметра";
         }
@@ -53,7 +53,7 @@ public class CalculatorController {
 
     @GetMapping("/divide")
     public String calcDivide(@RequestParam(value = "num1", required = false) String num1Str,
-                           @RequestParam(value = "num2", required = false) String num2Str) {
+                             @RequestParam(value = "num2", required = false) String num2Str) {
         if (num1Str == null || num2Str == null) {
             return "Введите два параметра";
         }
