@@ -1,52 +1,27 @@
 package pro.sky.collections.domain;
 
 public class Employee {
-    private String fname;
-    private int departmentNum;
-    private double salary;
-    private int id;
+    private String firstName;
+    private String lastName;
 
-    public Employee(String fname, int departmentNum, double salary, int id) {
-        this.fname = fname;
-        this.departmentNum = departmentNum;
-        this.salary = salary;
-        this.id = id;
+    public Employee(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
-    public String getFname() {
-        return fname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public int getDepartmentNum() {
-        return departmentNum;
-    }
-
-    public double getSalary() {
-        return salary;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setFname(String fname) {
-        this.fname = fname;
-    }
-
-    public void setDepartmentNum(int departmentNum) {
-        this.departmentNum = departmentNum;
-    }
-
-    public void setSalary(double salary) {
-        this.salary = salary;
+    public String getLastName() {
+        return lastName;
     }
 
     @Override
     public String toString() {
         return "Employee{" +
-                "name='" + fname + '\'' +
-                ", departmentNum='" + departmentNum + '\'' +
-                ", salary='" + salary + '\'' +
+                "name = '" + firstName + '\'' +
+                ", last name = '" + lastName +
                 '}';
     }
 
@@ -56,13 +31,12 @@ public class Employee {
             return false;
         }
         Employee e2 = (Employee) obj;
-        return fname.equals(e2.fname) &&
-                departmentNum == e2.departmentNum &&
-                salary == e2.salary;
+        return firstName.equals(e2.firstName) &&
+                lastName.equals(e2.lastName);
     }
 
     @Override
     public int hashCode() {
-        return java.util.Objects.hash(fname + departmentNum + salary);
+        return java.util.Objects.hash(firstName + lastName);
     }
 }
