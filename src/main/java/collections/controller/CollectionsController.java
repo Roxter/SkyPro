@@ -1,40 +1,40 @@
-package pro.sky.collections.controller;
+package collections.controller;
 
+import collections.domain.Employee;
+import collections.exceptions.EmployeeAlreadyAddedException;
+import collections.exceptions.EmployeeNotFoundException;
+import collections.exceptions.EmployeeStorageIsFullException;
+import collections.service.EmployeeService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pro.sky.collections.domain.Employee;
-import pro.sky.collections.service.EmployeeService;
-import pro.sky.exceptions.EmployeeAlreadyAddedException;
-import pro.sky.exceptions.EmployeeNotFoundException;
-import pro.sky.exceptions.EmployeeStorageIsFullException;
 
-import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/employee")
 public class CollectionsController {
-    private final EmployeeService empbook;
+    private final EmployeeService empBook;
 
     public CollectionsController(EmployeeService employeeService) {
-        this.empbook = employeeService;
-        empbook.addNewEmployee("Иван Иванович", "Иванов");
-        empbook.addNewEmployee("Петр Петрович", "Петров");
-        /*empbook.addNewEmployee("Сергей Иванович", "Крылов");
-        empbook.addNewEmployee("Константин Сергеевич", "Агуреев");
-        empbook.addNewEmployee("Павел Иванович", "Соткин");
-        empbook.addNewEmployee("Александр Игоревич", "Игнатьев");
-        empbook.addNewEmployee("Ильшат Тагирович", "Дулетов");
-        empbook.addNewEmployee("Игорь Терентьевич", "Уральский");
-        empbook.addNewEmployee("Игорь Терентьевич", "Кацурин");
-        empbook.addNewEmployee("1", "2");
-        empbook.addNewEmployee("3", "4");
-        empbook.findEmployee("1", "2");
-        empbook.findEmployee("1", "22");
-        empbook.deleteEmployee("1", "2");
-        empbook.deleteEmployee("1", "2");
-        empbook.deleteEmployee("1", "22");*/
+        this.empBook = employeeService;
+        /*empBook.addNewEmployee("Иван Иванович", "Иванов");
+        empBook.addNewEmployee("Петр Петрович", "Петров");
+        empBook.addNewEmployee("Сергей Иванович", "Крылов");
+        empBook.addNewEmployee("Константин Сергеевич", "Агуреев");
+        empBook.addNewEmployee("Павел Иванович", "Соткин");
+        empBook.addNewEmployee("Александр Игоревич", "Игнатьев");
+        empBook.addNewEmployee("Ильшат Тагирович", "Дулетов");
+        empBook.addNewEmployee("Игорь Терентьевич", "Уральский");
+        empBook.addNewEmployee("Игорь Терентьевич", "Кацурин");
+        empBook.addNewEmployee("1", "2");
+        empBook.addNewEmployee("3", "4");
+        empBook.findEmployee("1", "2");
+        empBook.findEmployee("1", "22");
+        empBook.deleteEmployee("1", "2");
+        empBook.deleteEmployee("1", "2");
+        empBook.deleteEmployee("1", "22");*/
     }
 
     @GetMapping
@@ -46,7 +46,7 @@ public class CollectionsController {
     public String findEmployee(@RequestParam(value = "firstName") String firstNameStr,
                                @RequestParam(value = "lastName") String lastNameStr) {
         try {
-            empbook.findEmployee(firstNameStr, lastNameStr);
+            empBook.findEmployee(firstNameStr, lastNameStr);
         } catch (EmployeeNotFoundException e) {
             return "Сотрудник " + lastNameStr + " " + firstNameStr + " не найден.";
         }
@@ -57,7 +57,7 @@ public class CollectionsController {
     public String addEmployee(@RequestParam(value = "firstName") String firstNameStr,
                               @RequestParam(value = "lastName") String lastNameStr) {
         try {
-            empbook.addNewEmployee(firstNameStr, lastNameStr);
+            empBook.addNewEmployee(firstNameStr, lastNameStr);
         } catch (EmployeeAlreadyAddedException e1) {
             return "Сотрудник " + firstNameStr + " уже добавлен. Добавление отменено.";
         } catch (EmployeeStorageIsFullException e2) {
@@ -70,7 +70,7 @@ public class CollectionsController {
     public String delEmployee(@RequestParam(value = "firstName") String firstNameStr,
                               @RequestParam(value = "lastName") String lastNameStr) {
         try {
-            empbook.deleteEmployee(firstNameStr, lastNameStr);
+            empBook.deleteEmployee(firstNameStr, lastNameStr);
         } catch (EmployeeNotFoundException e) {
             return "Сотрудник " + firstNameStr + " не найден. Удаление отменено.";
         }
@@ -80,10 +80,12 @@ public class CollectionsController {
     @GetMapping("list")
     public StringBuilder listEmployees() {
         StringBuilder jsonString = new StringBuilder("[ ");
-        List<Employee> employeeStore = empbook.getListEmployees();
-        for (Employee employee : employeeStore) {
-            String currStrEmpl = String.format("{ \"firstName\": \"%s\", \"lastName\": \"%s }", employee.getFirstName(), employee.getLastName());
-            jsonString.append(currStrEmpl).append(", ");
+        Map<Employee, Integer> employeeStore = empBook.getListEmployees();
+        for (Employee employee : employeeStore.keySet()) {
+            if (employee != null) {
+                String currStrEmp = String.format("{ \"firstName\": \"%s\", \"lastName\": \"%s }", employee.getFirstName(), employee.getLastName());
+                jsonString.append(currStrEmp).append(", ");
+            }
         }
         jsonString.append(" ]");
         return jsonString;

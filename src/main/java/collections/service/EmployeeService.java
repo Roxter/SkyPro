@@ -1,51 +1,56 @@
-package pro.sky.collections.service;
+package collections.service;
 
+import collections.domain.Employee;
+import collections.exceptions.EmployeeAlreadyAddedException;
+import collections.exceptions.EmployeeNotFoundException;
+import collections.exceptions.EmployeeStorageIsFullException;
 import org.springframework.stereotype.Service;
-import pro.sky.collections.domain.Employee;
-import pro.sky.exceptions.EmployeeAlreadyAddedException;
-import pro.sky.exceptions.EmployeeNotFoundException;
-import pro.sky.exceptions.EmployeeStorageIsFullException;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class EmployeeService {
     private final int maxEmployees = 10;
-    private List<Employee> employeeStore = new ArrayList<>();
+    private final Map<Employee, Integer> employeeStore = new HashMap<>();
 
     public Employee findEmployee(String firstName, String lastName) {
         if (firstName == null || lastName == null) {
             throw new RuntimeException("Передано неверное ФИО. Запись не добавлена");
         }
-        Employee foundEmployee = null;
-        for (Employee emp : employeeStore) {
-            if (emp.getFirstName().equals(firstName) && emp.getLastName().equals(lastName)) {
-                foundEmployee = emp;
-                break;
-            }
-        }
-        if (foundEmployee != null) {
-            return foundEmployee;
-        } else {
+        if (employeeStore.size() == 0) {
             throw new EmployeeNotFoundException();
         }
+        Employee currEmp = new Employee(firstName, lastName);
+        for (Map.Entry<Employee, Integer> employee : employeeStore.entrySet()) {
+            if (employee.getKey() == null) {
+                break;
+            }
+            if (employee.getKey().hashCode() == currEmp.hashCode()) {
+                return currEmp;
+            }
+        }
+        throw new EmployeeNotFoundException();
     }
 
     public void addNewEmployee(String firstName, String lastName) {
         if (firstName == null || lastName == null) {
             throw new RuntimeException("Передано неверное ФИО. Запись не добавлена");
         }
-        if (employeeStore.size() >= maxEmployees) {
+        Employee foundEmployee;
+        Employee newEmployee = new Employee(firstName, lastName);
+        Integer sizeEmpStore = employeeStore.size();
+
+        if (sizeEmpStore >= maxEmployees) {
             throw new EmployeeStorageIsFullException();
         }
         try {
-            Employee foundEmployee = findEmployee(firstName, lastName);
+            foundEmployee = findEmployee(firstName, lastName);
             if (foundEmployee != null) {
                 throw new EmployeeAlreadyAddedException();
             }
         } catch (EmployeeNotFoundException e) {
-            employeeStore.add(new Employee(firstName, lastName));
+            employeeStore.put(newEmployee, sizeEmpStore);
         }
     }
 
@@ -63,7 +68,7 @@ public class EmployeeService {
         }
     }
 
-    public List<Employee> getListEmployees() {
+    public Map<Employee, Integer> getListEmployees() {
         return employeeStore;
     }
 }

@@ -1,4 +1,4 @@
-package pro.sky.collections.domain;
+package collections.domain;
 
 public class Employee {
     private String firstName;
@@ -37,6 +37,6 @@ public class Employee {
 
     @Override
     public int hashCode() {
-        return java.util.Objects.hash(firstName + lastName);
+        return java.util.Objects.hash(firstName, lastName);
     }
 }
