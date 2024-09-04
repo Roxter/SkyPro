@@ -21,7 +21,7 @@ public class EmployeeService {
         if (employeeStore.size() == 0) {
             throw new EmployeeNotFoundException();
         }
-        Employee currEmp = new Employee(firstName, lastName);
+        Employee currEmp = new Employee(firstName, lastName, 0, 0);
         for (Map.Entry<Employee, Integer> employee : employeeStore.entrySet()) {
             if (employee.getKey() == null) {
                 break;
@@ -33,13 +33,13 @@ public class EmployeeService {
         throw new EmployeeNotFoundException();
     }
 
-    public void addNewEmployee(String firstName, String lastName) {
+    public void addNewEmployee(String firstName, String lastName, int departmentNum, double salary) {
         if (firstName == null || lastName == null) {
             throw new RuntimeException("Передано неверное ФИО. Запись не добавлена");
         }
         Employee foundEmployee;
-        Employee newEmployee = new Employee(firstName, lastName);
-        Integer sizeEmpStore = employeeStore.size();
+        Employee newEmployee = new Employee(firstName, lastName, departmentNum, salary);
+        int sizeEmpStore = employeeStore.size();
 
         if (sizeEmpStore >= maxEmployees) {
             throw new EmployeeStorageIsFullException();

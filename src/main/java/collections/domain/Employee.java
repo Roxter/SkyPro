@@ -1,13 +1,22 @@
 package collections.domain;
 
 public class Employee {
-    private String firstName;
-    private String lastName;
+    private final String firstName;
+    private final String lastName;
+    private final int departmentNum;
+    private final double salary;
 
-    public Employee(String firstName, String lastName) {
+    public Employee(String firstName, String lastName, int departmentNum, double salary) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.departmentNum = departmentNum;
+        this.salary = salary;
     }
+
+   /*public Employee(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }*/
 
     public String getFirstName() {
         return firstName;
@@ -15,6 +24,14 @@ public class Employee {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public int getDepartmentNum() {
+        return departmentNum;
+    }
+
+    public double getSalary() {
+        return salary;
     }
 
     @Override

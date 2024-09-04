@@ -5,14 +5,14 @@ import collections.exceptions.EmployeeAlreadyAddedException;
 import collections.exceptions.EmployeeNotFoundException;
 import collections.exceptions.EmployeeStorageIsFullException;
 import collections.service.EmployeeService;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
-@RestController
+@Controller
 @RequestMapping("/employee")
 public class CollectionsController {
     private final EmployeeService empBook;
@@ -55,9 +55,11 @@ public class CollectionsController {
 
     @GetMapping("add")
     public String addEmployee(@RequestParam(value = "firstName") String firstNameStr,
-                              @RequestParam(value = "lastName") String lastNameStr) {
+                              @RequestParam(value = "lastName") String lastNameStr,
+                              @RequestParam(value = "deptNo") Integer deptNo,
+                              @RequestParam(value = "salary") Integer salary) {
         try {
-            empBook.addNewEmployee(firstNameStr, lastNameStr);
+            empBook.addNewEmployee(firstNameStr, lastNameStr, deptNo, salary);
         } catch (EmployeeAlreadyAddedException e1) {
             return "Сотрудник " + firstNameStr + " уже добавлен. Добавление отменено.";
         } catch (EmployeeStorageIsFullException e2) {
