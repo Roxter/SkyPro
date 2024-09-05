@@ -1,12 +1,10 @@
 package collections;
 
-import collections.domain.Employee;
 import collections.service.DepartmentService;
-import collections.service.EmployeeService;
 
 public class Main {
     public static void main(String[] args) {
-        DepartmentService departmentService = new DepartmentService(new EmployeeService());
+        /*DepartmentService departmentService = new DepartmentService();
         System.out.println(departmentService.getByDepartmentId(1));
 
         Employee empMin = departmentService.findMinEmplSalaryOnDep(1);
@@ -15,6 +13,6 @@ public class Main {
         Employee empMax = departmentService.findMaxEmplSalaryOnDep(1);
         System.out.println("Найден служащий " + empMax + " с максимальной зарплатой " + empMax.getSalary());
 
-        System.out.println(departmentService.getByDepartments());
+        System.out.println(departmentService.getByDepartments());*/
     }
 }

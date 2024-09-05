@@ -10,8 +10,8 @@ import java.util.stream.Collectors;
 public class DepartmentService {
     private final EmployeeService empBook;
 
-    public DepartmentService(EmployeeService employeeService) {
-        this.empBook = employeeService;
+    public DepartmentService() {
+        this.empBook = new EmployeeService();
         initListEmployees();
     }
 
