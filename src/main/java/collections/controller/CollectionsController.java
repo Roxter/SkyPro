@@ -82,8 +82,8 @@ public class CollectionsController {
     @GetMapping("list")
     public StringBuilder listEmployees() {
         StringBuilder jsonString = new StringBuilder("[ ");
-        Map<Employee, Integer> employeeStore = empBook.getListEmployees();
-        for (Employee employee : employeeStore.keySet()) {
+        Map<String, Employee> employeeStore = empBook.getListEmployees();
+        for (Employee employee : employeeStore.values()) {
             if (employee != null) {
                 String currStrEmp = String.format("{ \"firstName\": \"%s\", \"lastName\": \"%s }", employee.getFirstName(), employee.getLastName());
                 jsonString.append(currStrEmp).append(", ");

@@ -12,7 +12,7 @@ import java.util.Map;
 @Service
 public class EmployeeService {
     private final int maxEmployees = 10;
-    private final Map<Employee, Integer> employeeStore = new HashMap<>();
+    private final Map<String, Employee> employeeStore = new HashMap<>();
 
     public Employee findEmployee(String firstName, String lastName) {
         if (firstName == null || lastName == null) {
@@ -22,11 +22,11 @@ public class EmployeeService {
             throw new EmployeeNotFoundException();
         }
         Employee currEmp = new Employee(firstName, lastName, 0, 0);
-        for (Map.Entry<Employee, Integer> employee : employeeStore.entrySet()) {
-            if (employee.getKey() == null) {
+        for (Map.Entry<String, Employee> employee : employeeStore.entrySet()) {
+            if (employee.getValue() == null) {
                 break;
             }
-            if (employee.getKey().hashCode() == currEmp.hashCode()) {
+            if (employee.getValue().hashCode() == currEmp.hashCode()) {
                 return currEmp;
             }
         }
@@ -50,7 +50,7 @@ public class EmployeeService {
                 throw new EmployeeAlreadyAddedException();
             }
         } catch (EmployeeNotFoundException e) {
-            employeeStore.put(newEmployee, sizeEmpStore);
+            employeeStore.put(newEmployee.toString(), newEmployee);
         }
     }
 
@@ -68,7 +68,7 @@ public class EmployeeService {
         }
     }
 
-    public Map<Employee, Integer> getListEmployees() {
+    public Map<String, Employee> getListEmployees() {
         return employeeStore;
     }
 }

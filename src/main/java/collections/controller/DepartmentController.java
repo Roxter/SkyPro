@@ -33,7 +33,7 @@ public class DepartmentController {
         return "Найден служащий " + empMax.toString() + " с максимальной зарплатой " + empMax.getSalary();
     }
 
-    @GetMapping("/all")
+    @GetMapping(path = "/all", params = "departmentId")
     public String getAllDepartmentsByDep(@RequestParam(value = "departmentId") Integer departmentId) {
         return "Список всех сотрудников департамента № " + departmentId + ":<br/>" + depBook.getByDepartmentId(departmentId);
     }
