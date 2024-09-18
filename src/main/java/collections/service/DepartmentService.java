@@ -26,32 +26,31 @@ public class DepartmentService {
         empBook.addNewEmployee("Игорь Терентьевич", "Уральский", 1, 20000);
         empBook.addNewEmployee("Игорь Терентьевич", "Кацурин", 2, 15000);
         empBook.addNewEmployee("1", "2", 2, 2);
-        //empBook.addNewEmployee("3", "4", 1, 2);
     }
 
     // Метод из Map<index, Employee> сделал List<Employee>
     public String getByDepartmentId(Integer depNum) {
-        return empBook.getListEmployees().values()
+        return empBook.getListEmployees()
                 .stream().filter(k -> k.getDepartmentNum() == depNum)
                 .collect(Collectors.toList()).toString();
     }
 
     public Employee findMinEmplSalaryOnDep(Integer depNum) {
-        final Optional<Employee> minEmplSalary = empBook.getListEmployees().values()
+        final Optional<Employee> minEmplSalary = empBook.getListEmployees()
                 .stream().filter(k -> k.getDepartmentNum() == depNum)
-                .min(Comparator.comparingDouble((p -> p.getSalary())));
+                .min(Comparator.comparingDouble((Employee::getSalary)));
         return minEmplSalary.orElseThrow(() -> new RuntimeException("Employee not found"));
     }
 
     public Employee findMaxEmplSalaryOnDep(Integer depNum) {
-        final Optional<Employee> maxEmplSalary = empBook.getListEmployees().values()
+        final Optional<Employee> maxEmplSalary = empBook.getListEmployees()
                 .stream().filter(k -> k.getDepartmentNum() == depNum)
-                .max(Comparator.comparingDouble((p -> p.getSalary())));
+                .max(Comparator.comparingDouble((Employee::getSalary)));
         return maxEmplSalary.orElseThrow(() -> new RuntimeException("Employee not found"));
     }
 
     public String getByDepartments() {
-        return empBook.getListEmployees().values()
+        return empBook.getListEmployees()
                 .stream().collect(Collectors.groupingBy(Employee::getDepartmentNum))
                 .toString();
     }

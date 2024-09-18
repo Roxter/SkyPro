@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
+import java.util.List;
 
 @RestController
 @RequestMapping("/employee")
@@ -19,22 +19,6 @@ public class CollectionsController {
 
     public CollectionsController(EmployeeService employeeService) {
         this.empBook = employeeService;
-        /*empBook.addNewEmployee("Иван Иванович", "Иванов");
-        empBook.addNewEmployee("Петр Петрович", "Петров");
-        empBook.addNewEmployee("Сергей Иванович", "Крылов");
-        empBook.addNewEmployee("Константин Сергеевич", "Агуреев");
-        empBook.addNewEmployee("Павел Иванович", "Соткин");
-        empBook.addNewEmployee("Александр Игоревич", "Игнатьев");
-        empBook.addNewEmployee("Ильшат Тагирович", "Дулетов");
-        empBook.addNewEmployee("Игорь Терентьевич", "Уральский");
-        empBook.addNewEmployee("Игорь Терентьевич", "Кацурин");
-        empBook.addNewEmployee("1", "2");
-        empBook.addNewEmployee("3", "4");
-        empBook.findEmployee("1", "2");
-        empBook.findEmployee("1", "22");
-        empBook.deleteEmployee("1", "2");
-        empBook.deleteEmployee("1", "2");
-        empBook.deleteEmployee("1", "22");*/
     }
 
     @GetMapping
@@ -43,47 +27,30 @@ public class CollectionsController {
     }
 
     @GetMapping("find")
-    public String findEmployee(@RequestParam(value = "firstName") String firstNameStr,
+    public Employee findEmployee(@RequestParam(value = "firstName") String firstNameStr,
                                @RequestParam(value = "lastName") String lastNameStr) {
-        try {
-            empBook.findEmployee(firstNameStr, lastNameStr);
-        } catch (EmployeeNotFoundException e) {
-            return "Сотрудник " + lastNameStr + " " + firstNameStr + " не найден.";
-        }
-        return String.format("{ \"firstName\": \"%s\", \"lastName\": \"%s\" }", firstNameStr, lastNameStr);
+        return empBook.findEmployee(firstNameStr, lastNameStr);
     }
 
     @GetMapping("add")
-    public String addEmployee(@RequestParam(value = "firstName") String firstNameStr,
+    public Employee addEmployee(@RequestParam(value = "firstName") String firstNameStr,
                               @RequestParam(value = "lastName") String lastNameStr,
                               @RequestParam(value = "deptNo") Integer deptNo,
                               @RequestParam(value = "salary") Integer salary) {
-        try {
-            empBook.addNewEmployee(firstNameStr, lastNameStr, deptNo, salary);
-        } catch (EmployeeAlreadyAddedException e1) {
-            return "Сотрудник " + firstNameStr + " уже добавлен. Добавление отменено.";
-        } catch (EmployeeStorageIsFullException e2) {
-            return "Список сотрудников переполнен. Добавление отменено.";
-        }
-        return String.format("{ \"firstName\": \"%s\", \"lastName\": \"%s\" }", firstNameStr, lastNameStr);
+        return empBook.addNewEmployee(firstNameStr, lastNameStr, deptNo, salary);
     }
 
     @GetMapping("delete")
-    public String delEmployee(@RequestParam(value = "firstName") String firstNameStr,
+    public Employee delEmployee(@RequestParam(value = "firstName") String firstNameStr,
                               @RequestParam(value = "lastName") String lastNameStr) {
-        try {
-            empBook.deleteEmployee(firstNameStr, lastNameStr);
-        } catch (EmployeeNotFoundException e) {
-            return "Сотрудник " + firstNameStr + " не найден. Удаление отменено.";
-        }
-        return String.format("{ \"firstName\": \"%s\", \"lastName\": \"%s\" }", firstNameStr, lastNameStr);
+        return empBook.deleteEmployee(firstNameStr, lastNameStr);
     }
 
     @GetMapping("list")
     public StringBuilder listEmployees() {
         StringBuilder jsonString = new StringBuilder("[ ");
-        Map<String, Employee> employeeStore = empBook.getListEmployees();
-        for (Employee employee : employeeStore.values()) {
+        List<Employee> employeeStore = empBook.getListEmployees();
+        for (Employee employee : employeeStore) {
             if (employee != null) {
                 String currStrEmp = String.format("{ \"firstName\": \"%s\", \"lastName\": \"%s }", employee.getFirstName(), employee.getLastName());
                 jsonString.append(currStrEmp).append(", ");
