@@ -3,23 +3,27 @@ package collections.service;
 import collections.domain.Employee;
 import collections.exceptions.EmployeeAlreadyAddedException;
 import collections.exceptions.EmployeeNotFoundException;
+import collections.exceptions.EmployeeNotValidDataException;
 import collections.exceptions.EmployeeStorageIsFullException;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class EmployeeService {
     private final int maxEmployees = 10;
     private final Map<String, Employee> employeeStore = new HashMap<>();
+    private final String symbMask = "абвгдезжийклмнопрстуфхцчшщъыьэюя ";
 
     public Employee findEmployee(String firstName, String lastName) {
         if (firstName == null || lastName == null) {
             throw new RuntimeException("Передано неверное ФИО. Запись не добавлена");
         }
+        if (!validUserEntry(firstName) || !validUserEntry(lastName)) {
+            throw new EmployeeNotValidDataException("Введены неверные данные. Запись не добавлена");
+        }
+        if (StringUtils.startsWith())
         if (employeeStore.size() == 0) {
             throw new EmployeeNotFoundException("Сотрудник " + lastName + " " + firstName + " не найден.");
         }
@@ -39,6 +43,9 @@ public class EmployeeService {
     public Employee addNewEmployee(String firstName, String lastName, int departmentNum, double salary) {
         if (firstName == null || lastName == null) {
             throw new RuntimeException("Передано неверное ФИО. Запись не добавлена");
+        }
+        if (!validUserEntry(firstName) || !validUserEntry(lastName)) {
+            throw new EmployeeNotValidDataException("Введены неверные данные. Запись не добавлена");
         }
 
         Employee newEmployee = new Employee(firstName, lastName, departmentNum, salary);
@@ -60,6 +67,9 @@ public class EmployeeService {
         if (firstNameToDelete == null || lastNameToDelete == null) {
             throw new RuntimeException("Передано неверное ФИО. Запись не добавлена");
         }
+        if (!validUserEntry(firstNameToDelete) || !validUserEntry(lastNameToDelete)) {
+                throw new EmployeeNotValidDataException("Введены неверные данные. Запись не добавлена");
+        }
         Employee currEmp = new Employee(firstNameToDelete, lastNameToDelete, 0, 0);
         String currHashEmp = currEmp.toString();
         if (employeeStore.containsKey(currHashEmp)) {
@@ -72,5 +82,9 @@ public class EmployeeService {
 
     public List<Employee> getListEmployees() {
         return new ArrayList<>(employeeStore.values());
+    }
+
+    public boolean validUserEntry(String str) {
+        return StringUtils.containsOnly(str.toLowerCase(Locale.ROOT), symbMask);
     }
 }
