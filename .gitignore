@@ -2,7 +2,7 @@
 /out/
 *.iml
 # Default ignored files
-/shelf/
+/.idea/shelf/
 /workspace.xml
 # Datasource local storage ignored files
 /dataSources/
