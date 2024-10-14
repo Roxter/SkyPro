@@ -15,15 +15,16 @@ public class EmployeeService {
     private final int maxEmployees = 10;
     private final Map<String, Employee> employeeStore = new HashMap<>();
     private final String symbMask = "абвгдезжийклмнопрстуфхцчшщъыьэюя ";
+    private final String upperCaseMask = "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
 
     public Employee findEmployee(String firstName, String lastName) {
-        if (firstName == null || lastName == null) {
-            throw new RuntimeException("Передано неверное ФИО. Запись не добавлена");
+        checkFio(firstName, lastName);
+        if (!validUpperCaseUserEntry(firstName)) {
+            firstName = StringUtils.capitalize(firstName);
         }
-        if (!validUserEntry(firstName) || !validUserEntry(lastName)) {
-            throw new EmployeeNotValidDataException("Введены неверные данные. Запись не добавлена");
+        if (!validUpperCaseUserEntry(lastName)) {
+            lastName = StringUtils.capitalize(lastName);
         }
-        if (StringUtils.startsWith())
         if (employeeStore.size() == 0) {
             throw new EmployeeNotFoundException("Сотрудник " + lastName + " " + firstName + " не найден.");
         }
@@ -41,13 +42,13 @@ public class EmployeeService {
     }
 
     public Employee addNewEmployee(String firstName, String lastName, int departmentNum, double salary) {
-        if (firstName == null || lastName == null) {
-            throw new RuntimeException("Передано неверное ФИО. Запись не добавлена");
+        checkFio(firstName, lastName);
+        if (!validUpperCaseUserEntry(firstName)) {
+            firstName = StringUtils.capitalize(firstName);
         }
-        if (!validUserEntry(firstName) || !validUserEntry(lastName)) {
-            throw new EmployeeNotValidDataException("Введены неверные данные. Запись не добавлена");
+        if (!validUpperCaseUserEntry(lastName)) {
+            lastName = StringUtils.capitalize(lastName);
         }
-
         Employee newEmployee = new Employee(firstName, lastName, departmentNum, salary);
         int sizeEmpStore = employeeStore.size();
 
@@ -64,12 +65,7 @@ public class EmployeeService {
     }
 
     public Employee deleteEmployee(String firstNameToDelete, String lastNameToDelete) {
-        if (firstNameToDelete == null || lastNameToDelete == null) {
-            throw new RuntimeException("Передано неверное ФИО. Запись не добавлена");
-        }
-        if (!validUserEntry(firstNameToDelete) || !validUserEntry(lastNameToDelete)) {
-                throw new EmployeeNotValidDataException("Введены неверные данные. Запись не добавлена");
-        }
+        checkFio(firstNameToDelete, lastNameToDelete);
         Employee currEmp = new Employee(firstNameToDelete, lastNameToDelete, 0, 0);
         String currHashEmp = currEmp.toString();
         if (employeeStore.containsKey(currHashEmp)) {
@@ -84,7 +80,19 @@ public class EmployeeService {
         return new ArrayList<>(employeeStore.values());
     }
 
-    public boolean validUserEntry(String str) {
+    private boolean validUserEntry(String str) {
         return StringUtils.containsOnly(str.toLowerCase(Locale.ROOT), symbMask);
+    }
+
+    private boolean validUpperCaseUserEntry(String str) {
+        return StringUtils.containsAny(StringUtils.trim(str), upperCaseMask);
+    }
+    private void checkFio(String firstName, String lastName) {
+        if (firstName == null || lastName == null) {
+            throw new RuntimeException("Передано неверное ФИО. Запись не добавлена");
+        }
+        if (!validUserEntry(firstName) || !validUserEntry(lastName)) {
+            throw new EmployeeNotValidDataException("Введены неверные данные. Запись не добавлена");
+        }
     }
 }
