@@ -21,7 +21,11 @@ public class StoreService {
         basket.add(objId);
     }
 
-    public String getFromBasket() throws JsonProcessingException {
-        return objectMapper.writeValueAsString(basket.get());
+    public String getFromBasket() {
+        try {
+            return objectMapper.writeValueAsString(basket.get());
+        } catch (JsonProcessingException n) {
+            throw new RuntimeException("Исключение во время вывода Json");
+        }
     }
 }
