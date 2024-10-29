@@ -3,11 +3,11 @@ package collections.service;
 import collections.domain.Basket;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.SessionScope;
 
 @Service
-@Scope("session")
+@SessionScope
 public class StoreService {
     private Basket basket;
     private final ObjectMapper objectMapper;

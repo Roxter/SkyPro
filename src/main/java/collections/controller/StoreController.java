@@ -28,11 +28,12 @@ public class StoreController {
     }
 
     @GetMapping("/get")
-    public String getFromBasket() throws JsonProcessingException {
+    public String getFromBasket() {
+        String goods;
         try {
-            String goods = storeService.getFromBasket();
+            goods = storeService.getFromBasket();
         } catch (JsonProcessingException n) {
-            n.getStackTrace();
+            throw new RuntimeException("Исключение во время вывода Json");
         }
         return "Список товаров по id: \n" + goods;
     }

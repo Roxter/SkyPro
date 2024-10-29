@@ -1,7 +1,10 @@
 package collections.domain;
 
+import org.springframework.stereotype.Component;
+
 import java.util.HashSet;
 
+@Component
 public class Basket {
     private final HashSet<Integer> goods;
 
