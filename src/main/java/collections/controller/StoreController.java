@@ -1,6 +1,7 @@
 package collections.controller;
 
 import collections.service.StoreService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,8 +28,12 @@ public class StoreController {
     }
 
     @GetMapping("/get")
-    public String getFromBasket() {
-        String goods = storeService.getFromBasket();
-        return "Список товаров: \n" + goods;
+    public String getFromBasket() throws JsonProcessingException {
+        try {
+            String goods = storeService.getFromBasket();
+        } catch (JsonProcessingException n) {
+            n.getStackTrace();
+        }
+        return "Список товаров по id: \n" + goods;
     }
 }
