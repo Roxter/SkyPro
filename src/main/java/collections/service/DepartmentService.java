@@ -49,6 +49,17 @@ public class DepartmentService {
         return maxEmplSalary.orElseThrow(() -> new RuntimeException("Employee not found"));
     }
 
+    public Double findSumEmplSalaryOnDep(Integer depNum) {
+        final Double sumEmplSalary = empBook.getListEmployees()
+                .stream().filter(k -> k.getDepartmentNum() == depNum)
+                .mapToDouble(Employee::getSalary).sum();
+        if (sumEmplSalary == 0.0 || sumEmplSalary == null) {
+            throw new RuntimeException("Employees not found in department");
+        } else {
+            return sumEmplSalary;
+        }
+    }
+
     public String getByDepartments() {
         return empBook.getListEmployees()
                 .stream().collect(Collectors.groupingBy(Employee::getDepartmentNum))
