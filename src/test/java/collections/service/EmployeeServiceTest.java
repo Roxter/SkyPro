@@ -3,8 +3,7 @@ package collections.service;
 import collections.domain.Employee;
 import org.junit.jupiter.api.Test;
 
-import static collections.service.EmployeeServiceTestConstants.FINDEDFIRSTNAME;
-import static collections.service.EmployeeServiceTestConstants.FINDEDLASTNAME;
+import static collections.service.EmployeeServiceTestConstants.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 
@@ -14,6 +13,8 @@ class EmployeeServiceTest {
 
     @Test
     void findEmployee() {
+        employeeService.addNewEmployee(FINDEDFIRSTNAME, FINDEDLASTNAME, DEPARTMENT, SALARY);
+
         Employee result = employeeService.findEmployee(FINDEDFIRSTNAME, FINDEDLASTNAME);
         assertThat(result.getFirstName()).isEqualTo(FINDEDFIRSTNAME);
         assertThat(result.getLastName()).isEqualTo(FINDEDLASTNAME);
@@ -57,22 +58,22 @@ class EmployeeServiceTest {
     }
 
     @Test
-        void shouldAddEmployee_WhenToManyEmployee_Then() {
+    void shouldAddEmployee_WhenToManyEmployee_Then() {
 
     }
 
     @Test
-        void shouldAddEmployee_WhenEmployeeAlreadyAdded_() {
+    void shouldAddEmployee_WhenEmployeeAlreadyAdded_() {
 
     }
 
     @Test
-        void shouldFindEmployee_WhenEmployeeNotExist_Then() {
+    void shouldFindEmployee_WhenEmployeeNotExist_Then() {
 
     }
 
     @Test
-        void shouldFindAllEmployees_WhenEmptyMap_ThenReturnEmpty() {
+    void shouldFindAllEmployees_WhenEmptyMap_ThenReturnEmpty() {
 
     }
 }

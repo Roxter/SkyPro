@@ -4,5 +4,6 @@ public class EmployeeServiceTestConstants {
     public static final String FINDEDFIRSTNAME = "David";
     public static final String FINDEDLASTNAME = "Belle";
     public static final String FINDEDNOTFOUND = "Сотрудник David Belle не найден.";
-    //public static final Integer
+    public static final Integer DEPARTMENT = 5;
+    public static final Integer SALARY = 15000;
 }
