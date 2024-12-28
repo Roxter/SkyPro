@@ -13,7 +13,7 @@ import java.util.Map;
 
 @Service
 public class EmployeeService {
-    private final int maxEmployees = 10;
+    public static final int maxEmployees = 10;
     private final Map<String, Employee> employeeStore = new HashMap<>();
 
     public Employee findEmployee(String firstName, String lastName) {

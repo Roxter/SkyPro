@@ -1,15 +1,20 @@
 package collections.service;
 
 import collections.domain.Employee;
+import collections.exceptions.EmployeeAlreadyAddedException;
+import collections.exceptions.EmployeeStorageIsFullException;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import static collections.service.EmployeeServiceTestConstants.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 
+@TestInstance(TestInstance.Lifecycle.PER_METHOD)
 class EmployeeServiceTest {
 
     private final EmployeeService employeeService = new EmployeeService();
+    private final Integer lastEmpNum = 10;
 
     @Test
     void findEmployee() {
@@ -33,11 +38,6 @@ class EmployeeServiceTest {
     }
 
     @Test
-    void shouldFindEmployee_WhenEmployeeExist_ThenReturn() {
-
-    }
-
-    @Test
     void shouldAddEmployee_WhenCorrectParams_ThenAdd() {
 
     }
@@ -58,12 +58,23 @@ class EmployeeServiceTest {
     }
 
     @Test
-    void shouldAddEmployee_WhenToManyEmployee_Then() {
+    void shouldAddEmployee_WhenToManyEmployee_ThenThrowException() {
+        for (int i = 0; i < EmployeeService.maxEmployees; i++) {
+            employeeService.addNewEmployee(FINDEDFIRSTNAME + "_" + (Integer)i, FINDEDLASTNAME + "_" + (Integer)i, DEPARTMENT + i, SALARY + i);
+        }
 
+        assertThatExceptionOfType(EmployeeStorageIsFullException.class).isThrownBy(() -> employeeService.addNewEmployee(FINDEDFIRSTNAME + "_" + lastEmpNum, FINDEDLASTNAME + "_" + lastEmpNum, DEPARTMENT + lastEmpNum, SALARY + lastEmpNum));
     }
 
     @Test
     void shouldAddEmployee_WhenEmployeeAlreadyAdded_() {
+        employeeService.addNewEmployee(FINDEDFIRSTNAME, FINDEDLASTNAME, DEPARTMENT, SALARY);
+
+        assertThatExceptionOfType(EmployeeAlreadyAddedException.class).isThrownBy(() -> employeeService.addNewEmployee(FINDEDFIRSTNAME, FINDEDLASTNAME, DEPARTMENT, SALARY));
+    }
+
+    @Test
+    void shouldFindEmployee_WhenEmployeeExist_ThenReturn() {
 
     }
 
