@@ -16,14 +16,14 @@ public class Basket {
             return;
         }
         int len = products.length;
-        if (len >= max_cells) {
-            System.out.println("Корзина переполнена. Пожалуйста, освободите корзину.");
-            return;
-        }
         for (int i = 0; i < len; i++) {
             if (this.products[i] == null) {
                 this.products[i] = product;
+                System.out.println("Продукт " + product.getName() + " добавлен в корзину.");
                 break;
+            } else if (i == len-1) {
+                System.out.println("Корзина переполнена. Пожалуйста, освободите корзину.");
+                return;
             }
         }
     }
@@ -77,10 +77,15 @@ public class Basket {
             System.out.println("Корзина пуста.");
             return;
         }
-        for (Product product: products) {
-            if (product != null) {
+
+        boolean basketIsNotFill = false;
+        int len = products.length;
+        for (int i = 0; i < len; i++) {
+            if (products[i] != null) {
+                products[i] = null;
                 System.out.println("Элемент удалён");
-            } else {
+            }
+            if (i == len-1) {
                 System.out.println("Корзина очищена.");
                 return;
             }
