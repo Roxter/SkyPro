@@ -73,21 +73,19 @@ public class Basket {
     }
 
     public void clearBasket() {
-        if (products[0] == null) {
-            System.out.println("Корзина пуста.");
-            return;
-        }
-
         boolean basketIsNotFill = false;
         int len = products.length;
+
         for (int i = 0; i < len; i++) {
             if (products[i] != null) {
                 products[i] = null;
                 System.out.println("Элемент удалён");
+                basketIsNotFill = true;
             }
-            if (i == len - 1) {
+            if (i == len - 1 && basketIsNotFill) {
                 System.out.println("Корзина очищена.");
-                return;
+            } else if (i == len - 1 && !basketIsNotFill) {
+                System.out.println("Корзина пуста.");
             }
         }
     }
