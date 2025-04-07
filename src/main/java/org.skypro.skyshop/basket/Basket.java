@@ -21,7 +21,7 @@ public class Basket {
                 this.products[i] = product;
                 System.out.println("Продукт " + product.getName() + " добавлен в корзину.");
                 break;
-            } else if (i == len-1) {
+            } else if (i == len - 1) {
                 System.out.println("Корзина переполнена. Пожалуйста, освободите корзину.");
                 return;
             }
@@ -30,7 +30,7 @@ public class Basket {
 
     public int costBasket() {
         int total = 0;
-        for (Product product:products) {
+        for (Product product : products) {
             if (product != null) {
                 total = total + product.getPrice();
             } else {
@@ -47,7 +47,7 @@ public class Basket {
             return;
         }
         System.out.println("Корзина содержит:");
-        for (Product product: products) {
+        for (Product product : products) {
             if (product != null) {
                 System.out.println(product.getName() + ": " + product.getPrice());
                 total = total + product.getPrice();
@@ -63,7 +63,7 @@ public class Basket {
             System.out.println("Корзина пуста.");
             return false;
         }
-        for (Product product: products) {
+        for (Product product : products) {
             String prodName = product.getName();
             if (name.equals(prodName)) {
                 return true;
@@ -85,7 +85,7 @@ public class Basket {
                 products[i] = null;
                 System.out.println("Элемент удалён");
             }
-            if (i == len-1) {
+            if (i == len - 1) {
                 System.out.println("Корзина очищена.");
                 return;
             }
