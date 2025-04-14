@@ -42,6 +42,8 @@ public class Basket {
 
     public void printContent() {
         int total = 0;
+        int totalSpecProd = 0;
+
         if (products[0] == null) {
             System.out.println("Корзина пуста.");
             return;
@@ -49,13 +51,17 @@ public class Basket {
         System.out.println("Корзина содержит:");
         for (Product product : products) {
             if (product != null) {
-                System.out.println(product.getName() + ": " + product.getPrice());
+                System.out.println(product.toString());
                 total = total + product.getPrice();
+                if (product.isSpecial()) {
+                    totalSpecProd = totalSpecProd + 1;
+                }
             } else {
                 break;
             }
         }
         System.out.println("Итого: " + total);
+        System.out.println("Специальных товаров: " + totalSpecProd);
     }
 
     public boolean checkProduct(String name) {
