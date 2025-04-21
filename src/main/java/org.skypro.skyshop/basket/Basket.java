@@ -4,10 +4,10 @@ import org.skypro.skyshop.product.Product;
 
 public class Basket {
     private final Product[] products;
-    private final int max_cells = 5;
+    private final int maxCells = 5;
 
     public Basket() {
-        this.products = new Product[max_cells];
+        this.products = new Product[maxCells];
     }
 
     public void addToBusket(Product product) {
@@ -51,7 +51,7 @@ public class Basket {
         System.out.println("Корзина содержит:");
         for (Product product : products) {
             if (product != null) {
-                System.out.println(product.toString());
+                System.out.println(product);
                 total = total + product.getPrice();
                 if (product.isSpecial()) {
                     totalSpecProd = totalSpecProd + 1;
