@@ -12,6 +12,10 @@ public class SimpleProduct extends Product {
         return price;
     }
 
+    public String contentType() {
+        return "SimpleProduct";
+    }
+
     @Override
     public boolean isSpecial() {
         return false;

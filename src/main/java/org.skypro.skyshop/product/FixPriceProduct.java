@@ -11,6 +11,10 @@ public class FixPriceProduct extends Product {
         return FIX_PRICE;
     }
 
+    public String contentType() {
+        return "FixPriceProduct";
+    }
+
     @Override
     public boolean isSpecial() {
         return true;

@@ -1,7 +1,6 @@
 package org.skypro.skyshop.product;
 
 public class DiscountedProduct extends Product {
-
     private int baseCost;
     private int discountInProc;
 
@@ -9,6 +8,10 @@ public class DiscountedProduct extends Product {
         super(name);
         this.baseCost = baseCost;
         this.discountInProc = discountInProc;
+    }
+
+    public String contentType() {
+        return "DiscountedProduct";
     }
 
     @Override
