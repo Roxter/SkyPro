@@ -12,7 +12,6 @@ import java.util.Arrays;
 class App {
 
     public static void main(String[] args) {
-
         SimpleProduct product1 = new SimpleProduct("Яйца", 560);
         SimpleProduct product2 = new SimpleProduct("Сыр", 680);
         SimpleProduct product3 = new SimpleProduct("Яблоки", 260);
