@@ -2,12 +2,12 @@ package org.skypro.skyshop.product;
 
 public class DiscountedProduct extends Product {
     private int baseCost;
-    private int discountInProc;
+    private int discountInPerc;
 
-    public DiscountedProduct(String name, int baseCost, int discountInProc) {
+    public DiscountedProduct(String name, int baseCost, int discountInPer) {
         super(name);
         this.baseCost = baseCost;
-        this.discountInProc = discountInProc;
+        this.discountInPerc = discountInPer;
     }
 
     public String contentType() {
@@ -16,7 +16,9 @@ public class DiscountedProduct extends Product {
 
     @Override
     public int getPrice() {
-        return (int) (baseCost * (1.0 - discountInProc / 100.0));
+        double perInverter = 1.0;
+        double perMux = 100.0;
+        return (int) (baseCost * (perMux - discountInPerc / perMux));
     }
 
     @Override
@@ -28,6 +30,6 @@ public class DiscountedProduct extends Product {
     public String toString() {
         return getName() +
                 ": " + getPrice() +
-                "р. (" + discountInProc + "%)";
+                "р. (" + discountInPerc + "%)";
     }
 }
