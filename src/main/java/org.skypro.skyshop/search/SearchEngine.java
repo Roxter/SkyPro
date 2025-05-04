@@ -1,31 +1,32 @@
 package org.skypro.skyshop.search;
 
 public class SearchEngine {
-    public Searchable[] searchStorage;
-    int tempStorageSize = 5;
-    String[] tempStorage;
+    private Searchable[] searchStorage;
+    private static final int tempStorageSize = 5;
+    public static final int startIndex = 0;
 
     public SearchEngine(int size) {
-        if (size <= 0) {
+        if (size <= startIndex) {
             System.out.println("Передано неверное значение. Повторите запрос");
             return;
         }
-        searchStorage = new Searchable[size];
+        this.searchStorage = new Searchable[size];
     }
 
-    public String[] search(String searchString) {
+    public Searchable[] search(String searchString) {
+        Searchable[] tempStorage = new Searchable[tempStorageSize];
         if (searchString == null) {
-            System.out.println("Передана нулевая строка. Поиск отменен");
-            return null;
+            System.out.println("Передана нулевая строка.");
+            return tempStorage;
         }
-        tempStorage = new String[tempStorageSize];
-        int tempStorageIndex = 0;
+
+        int tempStorageIndex = startIndex;
         for (Searchable searchable : searchStorage) {
             if (searchable.searchTerm().contains(searchString)) {
-                tempStorage[tempStorageIndex] = searchString;
+                tempStorage[tempStorageIndex] = searchable;
                 tempStorageIndex++;
             }
-            if (tempStorageIndex >= 5) {
+            if (tempStorageIndex >= tempStorageSize) {
                 break;
             }
         }
@@ -46,5 +47,9 @@ public class SearchEngine {
                 System.out.println("Массив поиска заполнен");
             }
         }
+    }
+
+    public Searchable[] getSearchStorage() {
+        return searchStorage;
     }
 }

@@ -8,4 +8,5 @@ public interface Searchable {
     default String getStringPresentation() {
         return searchTerm() + " " + contentType();
     }
+
 }

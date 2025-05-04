@@ -3,9 +3,9 @@ package org.skypro.skyshop;
 import org.skypro.skyshop.article.Article;
 import org.skypro.skyshop.product.DiscountedProduct;
 import org.skypro.skyshop.product.FixPriceProduct;
-import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct;
 import org.skypro.skyshop.search.SearchEngine;
+import org.skypro.skyshop.search.Searchable;
 
 import java.util.Arrays;
 
@@ -39,12 +39,12 @@ class App {
         searchProducts.add(product10);
         searchProducts.add(product11);
         searchProducts.add(product12);
-        System.out.println(searchProducts.searchStorage[0].searchTerm());
+        System.out.println(searchProducts.getSearchStorage()[0].searchTerm());
 
-        String[] searchResult1 = searchProducts.search("Яйца");
-        String[] searchResult2 = searchProducts.search("Молочная продукция");
-        String[] searchResult3 = searchProducts.search("Мясная продукция");
-        String[] searchResult4 = searchProducts.search("Хлеб");
+        Searchable[] searchResult1 = searchProducts.search("Яйца");
+        Searchable[] searchResult2 = searchProducts.search("Молочная продукция");
+        Searchable[] searchResult3 = searchProducts.search("Мясная продукция");
+        Searchable[] searchResult4 = searchProducts.search("Хлеб");
         System.out.println(Arrays.toString(searchResult1));
         System.out.println(Arrays.toString(searchResult2));
         System.out.println(Arrays.toString(searchResult3));

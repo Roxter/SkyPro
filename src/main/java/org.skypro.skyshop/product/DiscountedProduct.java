@@ -28,6 +28,6 @@ public class DiscountedProduct extends Product {
     public String toString() {
         return getName() +
                 ": " + getPrice() +
-                " (" + discountInProc + ")";
+                "р. (" + discountInProc + "%)";
     }
 }
