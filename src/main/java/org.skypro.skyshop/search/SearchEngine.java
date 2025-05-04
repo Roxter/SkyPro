@@ -15,7 +15,7 @@ public class SearchEngine {
 
     public Searchable[] search(String searchString) {
         Searchable[] tempStorage = new Searchable[tempStorageSize];
-        if (searchString == null) {
+        if (searchString == null || searchString.isEmpty()) {
             System.out.println("Передана нулевая строка.");
             return tempStorage;
         }

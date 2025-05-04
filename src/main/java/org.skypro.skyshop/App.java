@@ -45,9 +45,13 @@ class App {
         Searchable[] searchResult2 = searchProducts.search("Молочная продукция");
         Searchable[] searchResult3 = searchProducts.search("Мясная продукция");
         Searchable[] searchResult4 = searchProducts.search("Хлеб");
+        Searchable[] searchResult5 = searchProducts.search(null);
+        Searchable[] searchResult6 = searchProducts.search("");
         System.out.println(Arrays.toString(searchResult1));
         System.out.println(Arrays.toString(searchResult2));
         System.out.println(Arrays.toString(searchResult3));
         System.out.println(Arrays.toString(searchResult4));
+        System.out.println(Arrays.toString(searchResult5));
+        System.out.println(Arrays.toString(searchResult6));
     }
 }
