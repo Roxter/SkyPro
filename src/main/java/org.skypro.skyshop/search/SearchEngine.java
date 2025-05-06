@@ -3,7 +3,7 @@ package org.skypro.skyshop.search;
 public class SearchEngine {
     private Searchable[] searchStorage;
     private static final int tempStorageSize = 5;
-    public static final int startIndex = 0;
+    private static final int startIndex = 0;
 
     public SearchEngine(int size) {
         if (size <= startIndex) {
