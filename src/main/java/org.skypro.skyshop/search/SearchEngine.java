@@ -52,4 +52,22 @@ public class SearchEngine {
     public Searchable[] getSearchStorage() {
         return searchStorage;
     }
+
+    public Searchable getSearchTerm(String search) {
+        int cnt_searchs = 0;
+
+        for (Searchable searchable:searchStorage) {
+            if (searchable != null) {
+                String tempString = searchable.getStringPresentation();
+                int cnt = 0;
+                int index = 0;
+                int indexSubstring = tempString.indexOf(search, index);
+                while (indexSubstring != -1) {
+                    cnt++;
+                    index = indexSubstring + tempString.length();
+                    indexSubstring = tempString.indexOf(search, index);
+                }
+            }
+        }
+    }
 }

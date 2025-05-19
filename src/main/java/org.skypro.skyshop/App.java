@@ -12,9 +12,15 @@ import java.util.Arrays;
 class App {
 
     public static void main(String[] args) {
-        SimpleProduct product1 = new SimpleProduct("Яйца", 560);
+        //SimpleProduct product1 = new SimpleProduct(" ", 560);
+        //SimpleProduct product1 = new SimpleProduct("Яйца", 560);
+        //SimpleProduct product1 = new SimpleProduct("Яйца", -200);
+        SimpleProduct product1 = new SimpleProduct("Яйца", 200);
         SimpleProduct product2 = new SimpleProduct("Сыр", 680);
         SimpleProduct product3 = new SimpleProduct("Яблоки", 260);
+        //DiscountedProduct product4 = new DiscountedProduct(" ", 327, 30);
+        //DiscountedProduct product4 = new DiscountedProduct("Масло", -327, 30);
+        //DiscountedProduct product4 = new DiscountedProduct("Масло", 327, -30);
         DiscountedProduct product4 = new DiscountedProduct("Масло", 327, 30);
         DiscountedProduct product5 = new DiscountedProduct("Хлеб", 49, 50);
         DiscountedProduct product6 = new DiscountedProduct("Тушенка", 235, 26);
