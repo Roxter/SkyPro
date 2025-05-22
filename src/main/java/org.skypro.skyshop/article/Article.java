@@ -24,7 +24,7 @@ public final class Article implements Searchable {
     }
 
     public String searchTerm() {
-        return name;
+        return name + " " + text;
     }
 
     public String contentType() {

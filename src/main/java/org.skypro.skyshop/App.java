@@ -31,6 +31,7 @@ class App {
         Article product11 = new Article("Мясная продукция", "Говядина и свинина");
         Article product12 = new Article("Мясная продукция", "Курица");
 
+        System.out.println();
         SearchEngine searchProducts = new SearchEngine(9);
         searchProducts.add(product1);
         searchProducts.add(product2);
@@ -46,6 +47,7 @@ class App {
         searchProducts.add(product12);
         System.out.println(searchProducts.getSearchStorage()[0].searchTerm());
 
+        System.out.println();
         Searchable[] searchResult1 = searchProducts.search("Яйца");
         Searchable[] searchResult2 = searchProducts.search("Молочная продукция");
         Searchable[] searchResult3 = searchProducts.search("Мясная продукция");
@@ -58,5 +60,9 @@ class App {
         System.out.println(Arrays.toString(searchResult4));
         System.out.println(Arrays.toString(searchResult5));
         System.out.println(Arrays.toString(searchResult6));
+
+        System.out.println();
+        Searchable searchedObj = searchProducts.getSearchTerm("Груши");
+        System.out.println("Найденный объект: " + searchedObj.searchTerm());
     }
 }

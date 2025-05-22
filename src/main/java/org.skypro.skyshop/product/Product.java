@@ -1,7 +1,6 @@
 package org.skypro.skyshop.product;
 
 import io.micrometer.common.util.StringUtils;
-import org.skypro.skyshop.exceptions.WrongNameException;
 import org.skypro.skyshop.search.Searchable;
 
 public abstract class Product implements Searchable {

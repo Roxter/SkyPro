@@ -1,5 +1,7 @@
 package org.skypro.skyshop.search;
 
+import org.skypro.skyshop.exceptions.BestResultNotFound;
+
 public class SearchEngine {
     private Searchable[] searchStorage;
     private static final int tempStorageSize = 5;
@@ -54,20 +56,48 @@ public class SearchEngine {
     }
 
     public Searchable getSearchTerm(String search) {
-        int cnt_searchs = 0;
+        Integer[] cntSearches = new Integer[searchStorage.length];
+        int indexOfMaxSearches = 0;
+        int foundedSubstringsTotal = 0;
 
-        for (Searchable searchable:searchStorage) {
+        for (int i = 0; i < searchStorage.length; i++) {
+            Searchable searchable = searchStorage[i];
             if (searchable != null) {
-                String tempString = searchable.getStringPresentation();
+                String searchString = searchable.getStringPresentation();
                 int cnt = 0;
                 int index = 0;
-                int indexSubstring = tempString.indexOf(search, index);
+                int indexSubstring = searchString.indexOf(search, index);
                 while (indexSubstring != -1) {
                     cnt++;
-                    index = indexSubstring + tempString.length();
-                    indexSubstring = tempString.indexOf(search, index);
+                    index = indexSubstring + searchString.length();
+                    indexSubstring = searchString.indexOf(search, index);
+                }
+                cntSearches[i] = cnt;
+                if (cnt > 0) {
+                    foundedSubstringsTotal++;
                 }
             }
         }
+
+        if (foundedSubstringsTotal < 1) {
+            throw new BestResultNotFound("Не найден ни один из объектов");
+        }
+
+        indexOfMaxSearches = findOfMaxSearches(cntSearches);
+
+        return searchStorage[indexOfMaxSearches];
+    }
+
+    private int findOfMaxSearches(Integer[] cntSearches) {
+        int maxCntSearch = 0;
+        int indexOfMaxSearches = -1;
+
+        for (int i = 0; i < cntSearches.length; i++) {
+            if (cntSearches[i] > maxCntSearch) {
+                maxCntSearch = cntSearches[i];
+                indexOfMaxSearches = i;
+            }
+        }
+        return indexOfMaxSearches;
     }
 }
