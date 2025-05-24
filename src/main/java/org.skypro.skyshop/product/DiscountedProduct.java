@@ -16,10 +16,6 @@ public class DiscountedProduct extends Product {
         this.discountInPerc = discountInPer;
     }
 
-    public String contentType() {
-        return "DiscountedProduct";
-    }
-
     @Override
     public int getPrice() {
         double perInverter = 1.0;

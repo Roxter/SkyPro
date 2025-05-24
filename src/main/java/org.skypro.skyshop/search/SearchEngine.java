@@ -5,12 +5,10 @@ import org.skypro.skyshop.exceptions.BestResultNotFound;
 public class SearchEngine {
     private Searchable[] searchStorage;
     private static final int tempStorageSize = 5;
-    private static final int startIndex = 0;
 
     public SearchEngine(int size) {
-        if (size <= startIndex) {
-            System.out.println("Передано неверное значение. Повторите запрос");
-            return;
+        if (size <= 0) {
+            throw new IllegalArgumentException("Передано неверное значение. Повторите запрос");
         }
         this.searchStorage = new Searchable[size];
     }
@@ -18,11 +16,10 @@ public class SearchEngine {
     public Searchable[] search(String searchString) {
         Searchable[] tempStorage = new Searchable[tempStorageSize];
         if (searchString == null || searchString.isEmpty()) {
-            System.out.println("Передана нулевая строка.");
-            return tempStorage;
+            throw new IllegalArgumentException("Передана нулевая строка.");
         }
 
-        int tempStorageIndex = startIndex;
+        int tempStorageIndex = 0;
         for (Searchable searchable : searchStorage) {
             if (searchable.searchTerm().contains(searchString)) {
                 tempStorage[tempStorageIndex] = searchable;
@@ -37,16 +34,16 @@ public class SearchEngine {
 
     public void add(Searchable addedObject) {
         if (addedObject == null) {
-            System.out.println("Передан нулевой объект. Добавление отменено");
-            return;
+            throw new IllegalArgumentException("Передан нулевой объект. Добавление отменено");
         }
         for (int i = 0; i < searchStorage.length; i++) {
+            if (i >= searchStorage.length - 1) {
+                throw new BestResultNotFound("Массив поиска заполнен");
+            }
             if (searchStorage[i] == null) {
                 searchStorage[i] = addedObject;
                 System.out.println("Объект " + addedObject + " добавлен в поиск");
                 break;
-            } else if (i >= searchStorage.length - 1) {
-                System.out.println("Массив поиска заполнен");
             }
         }
     }
@@ -57,7 +54,7 @@ public class SearchEngine {
 
     public Searchable getSearchTerm(String search) {
         Integer[] cntSearches = new Integer[searchStorage.length];
-        int indexOfMaxSearches = 0;
+        int indexOfMaxSearches;
         int foundedSubstringsTotal = 0;
 
         for (int i = 0; i < searchStorage.length; i++) {
