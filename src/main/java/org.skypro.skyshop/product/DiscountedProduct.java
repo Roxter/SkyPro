@@ -1,16 +1,16 @@
 package org.skypro.skyshop.product;
 
 public class DiscountedProduct extends Product {
-    private int baseCost;
-    private int discountInPerc;
+    private final int baseCost;
+    private final int discountInPerc;
 
     public DiscountedProduct(String name, int baseCost, int discountInPer) {
         super(name);
-        if (baseCost <= 1)  {
+        if (baseCost <= 1) {
             throw new IllegalArgumentException("Неверно введена базовая стоимость");
         }
         this.baseCost = baseCost;
-        if (discountInPer < 0 || discountInPer > 100)  {
+        if (discountInPer < 0 || discountInPer > 100) {
             throw new IllegalArgumentException("Неверно введена стоимость скидки");
         }
         this.discountInPerc = discountInPer;

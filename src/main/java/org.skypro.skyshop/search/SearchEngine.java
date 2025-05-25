@@ -3,8 +3,8 @@ package org.skypro.skyshop.search;
 import org.skypro.skyshop.exceptions.BestResultNotFound;
 
 public class SearchEngine {
-    private Searchable[] searchStorage;
     private static final int tempStorageSize = 5;
+    private final Searchable[] searchStorage;
 
     public SearchEngine(int size) {
         if (size <= 0) {
@@ -49,7 +49,11 @@ public class SearchEngine {
     }
 
     public Searchable[] getSearchStorage() {
-        return searchStorage;
+        Searchable[] tempStorage = new Searchable[tempStorageSize];
+        for (int i = 0; i < tempStorage.length; i++) {
+            tempStorage[i] = searchStorage[i];
+        }
+        return tempStorage;
     }
 
     public Searchable getSearchTerm(String search) {
