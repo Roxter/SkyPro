@@ -2,31 +2,28 @@ package org.skypro.skyshop.search;
 
 import org.skypro.skyshop.exceptions.BestResultNotFound;
 
-public class SearchEngine {
-    private static final int tempStorageSize = 5;
-    private final Searchable[] searchStorage;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
-    public SearchEngine(int size) {
-        if (size <= 0) {
-            throw new IllegalArgumentException("Передано неверное значение. Повторите запрос");
-        }
-        this.searchStorage = new Searchable[size];
+public class SearchEngine {
+    private final List<Searchable> searchStorage;
+
+    public SearchEngine() {
+        this.searchStorage = new ArrayList<>();
     }
 
-    public Searchable[] search(String searchString) {
-        Searchable[] tempStorage = new Searchable[tempStorageSize];
+    public List<Searchable> search(String searchString) {
+        List<Searchable> tempStorage = new ArrayList<>();
+
         if (searchString == null || searchString.isEmpty()) {
             throw new IllegalArgumentException("Передана нулевая строка.");
         }
-
-        int tempStorageIndex = 0;
+       //int tempStorageIndex = 0;
         for (Searchable searchable : searchStorage) {
             if (searchable.searchTerm().contains(searchString)) {
-                tempStorage[tempStorageIndex] = searchable;
-                tempStorageIndex++;
-            }
-            if (tempStorageIndex >= tempStorageSize) {
-                break;
+                tempStorage.add(searchable);
             }
         }
         return tempStorage;
@@ -36,33 +33,23 @@ public class SearchEngine {
         if (addedObject == null) {
             throw new IllegalArgumentException("Передан нулевой объект. Добавление отменено");
         }
-        for (int i = 0; i < searchStorage.length; i++) {
-            if (i >= searchStorage.length - 1) {
-                throw new BestResultNotFound("Массив поиска заполнен");
-            }
-            if (searchStorage[i] == null) {
-                searchStorage[i] = addedObject;
-                System.out.println("Объект " + addedObject + " добавлен в поиск");
-                break;
-            }
-        }
+        searchStorage.add(addedObject);
+        System.out.println("Объект " + addedObject + " добавлен в поиск");
     }
 
-    public Searchable[] getSearchStorage() {
-        Searchable[] tempStorage = new Searchable[tempStorageSize];
-        for (int i = 0; i < tempStorage.length; i++) {
-            tempStorage[i] = searchStorage[i];
-        }
+    public List<Searchable> getSearchStorage() {
+        List<Searchable> tempStorage = new ArrayList<>();
+
+        Collections.copy(searchStorage, tempStorage);
         return tempStorage;
     }
 
     public Searchable getSearchTerm(String search) {
-        Integer[] cntSearches = new Integer[searchStorage.length];
+        List<Integer> cntSearches = new ArrayList<>();
         int indexOfMaxSearches;
         int foundedSubstringsTotal = 0;
 
-        for (int i = 0; i < searchStorage.length; i++) {
-            Searchable searchable = searchStorage[i];
+        for (Searchable searchable: searchStorage) {
             if (searchable != null) {
                 String searchString = searchable.getStringPresentation();
                 int cnt = 0;
@@ -73,32 +60,34 @@ public class SearchEngine {
                     index = indexSubstring + searchString.length();
                     indexSubstring = searchString.indexOf(search, index);
                 }
-                cntSearches[i] = cnt;
+                cntSearches.add(cnt);
                 if (cnt > 0) {
                     foundedSubstringsTotal++;
                 }
+            } else {
+                cntSearches.add(0);
             }
         }
-
         if (foundedSubstringsTotal < 1) {
             throw new BestResultNotFound("Не найден ни один из объектов");
         }
-
         indexOfMaxSearches = findOfMaxSearches(cntSearches);
-
-        return searchStorage[indexOfMaxSearches];
+        return searchStorage.get(indexOfMaxSearches);
     }
 
-    private int findOfMaxSearches(Integer[] cntSearches) {
+    private int findOfMaxSearches(List<Integer> cntSearches) {
         int maxCntSearch = 0;
         int indexOfMaxSearches = -1;
+        int indexCnt = 0;
 
-        for (int i = 0; i < cntSearches.length; i++) {
-            if (cntSearches[i] > maxCntSearch) {
-                maxCntSearch = cntSearches[i];
-                indexOfMaxSearches = i;
+        for (Integer i: cntSearches) {
+            if (i > maxCntSearch) {
+                maxCntSearch = i;
+                indexOfMaxSearches = indexCnt;
             }
+            indexCnt++;
         }
+
         return indexOfMaxSearches;
     }
 }
