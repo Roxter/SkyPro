@@ -2,30 +2,22 @@ package org.skypro.skyshop.basket;
 
 import org.skypro.skyshop.product.Product;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Basket {
-    private final Product[] products;
-    private final int maxCells = 5;
+    private final List<Product> products;
 
     public Basket() {
-        this.products = new Product[maxCells];
+        this.products = new ArrayList<>();
     }
 
-    public void addToBusket(Product product) {
+    public void addToBasket(Product product) {
         if (product == null) {
-            System.out.println("Передан неверный продукт. Запись не добавлена");
-            return;
+            throw new IllegalArgumentException("Передан неверный продукт. Запись не добавлена");
         }
-        int len = products.length;
-        for (int i = 0; i < len; i++) {
-            if (this.products[i] == null) {
-                this.products[i] = product;
-                System.out.println("Продукт " + product.getName() + " добавлен в корзину.");
-                break;
-            } else if (i == len - 1) {
-                System.out.println("Корзина переполнена. Пожалуйста, освободите корзину.");
-                return;
-            }
-        }
+        products.add(product);
+        System.out.println("Продукт " + product.getName() + " добавлен в корзину.");
     }
 
     public int costBasket() {
@@ -44,11 +36,17 @@ public class Basket {
         int total = 0;
         int totalSpecProd = 0;
 
-        if (products[0] == null) {
+        if (products.isEmpty()) {
             System.out.println("Корзина пуста.");
             return;
         }
         System.out.println("Корзина содержит:");
+        if (products.isEmpty()) {
+            System.out.println("Корзина пуста.");
+        } else {
+            products.clear();
+            System.out.println("Корзина очищена.");
+        }
         for (Product product : products) {
             if (product != null) {
                 System.out.println(product);
@@ -65,7 +63,7 @@ public class Basket {
     }
 
     public boolean checkProduct(String name) {
-        if (products[0] == null) {
+        if (products.isEmpty()) {
             System.out.println("Корзина пуста.");
             return false;
         }
@@ -79,20 +77,6 @@ public class Basket {
     }
 
     public void clearBasket() {
-        boolean basketIsNotFill = false;
-        int len = products.length;
 
-        for (int i = 0; i < len; i++) {
-            if (products[i] != null) {
-                products[i] = null;
-                System.out.println("Элемент удалён");
-                basketIsNotFill = true;
-            }
-            if (i == len - 1 && basketIsNotFill) {
-                System.out.println("Корзина очищена.");
-            } else if (i == len - 1 && !basketIsNotFill) {
-                System.out.println("Корзина пуста.");
-            }
-        }
     }
 }

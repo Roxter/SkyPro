@@ -77,7 +77,7 @@ class App {
     static void testBasket() {
         Basket basket = new Basket();
 
-        SimpleProduct product1 = new Basket("Яйца", 560);
+        SimpleProduct product1 = new SimpleProduct("Яйца", 560);
         SimpleProduct product2 = new SimpleProduct("Сыр", 680);
         SimpleProduct product3 = new SimpleProduct("Яблоки", 260);
         DiscountedProduct product4 = new DiscountedProduct("Масло", 327, 30);
@@ -88,12 +88,12 @@ class App {
         FixPriceProduct product9 = new FixPriceProduct("Тушенка");
 
         System.out.println("Добавление в корзину:");
-        basket.addToBusket(product1);
-        basket.addToBusket(product2);
-        basket.addToBusket(product3);
-        basket.addToBusket(product4);
-        basket.addToBusket(product5);
-        basket.addToBusket(product6);
+        basket.addToBasket(product1);
+        basket.addToBasket(product2);
+        basket.addToBasket(product3);
+        basket.addToBasket(product4);
+        basket.addToBasket(product5);
+        basket.addToBasket(product6);
 
         System.out.println("\nСодержимое корзины:");
         basket.printContent();
@@ -102,21 +102,21 @@ class App {
 
         System.out.println("\nОтдельные продукты корзины:");
         String nameOfCheckedProduct = "Хлеб";
-        if (check(nameOfCheckedProduct)) {
+        if (check(basket, nameOfCheckedProduct)) {
             System.out.println("Продукт " + nameOfCheckedProduct + " найден.");
         } else {
             System.out.println("Продукт " + nameOfCheckedProduct + " не найден.");
         }
 
         nameOfCheckedProduct = "Яйца";
-        if (check(nameOfCheckedProduct)) {
+        if (check(basket, nameOfCheckedProduct)) {
             System.out.println("Продукт " + nameOfCheckedProduct + " найден.");
         } else {
             System.out.println("Продукт " + nameOfCheckedProduct + " не найден.");
         }
 
         nameOfCheckedProduct = "Тушенка";
-        if (check(nameOfCheckedProduct)) {
+        if (check(basket, nameOfCheckedProduct)) {
             System.out.println("Продукт " + nameOfCheckedProduct + " найден.");
         } else {
             System.out.println("Продукт " + nameOfCheckedProduct + " не найден.");
@@ -130,7 +130,7 @@ class App {
 
         System.out.println("\nПоиск товара в пустой корзине:");
         nameOfCheckedProduct = "Тушенка";
-        if (check(nameOfCheckedProduct)) {
+        if (check(basket, nameOfCheckedProduct)) {
             System.out.println("Продукт " + nameOfCheckedProduct + " найден.");
         } else {
             System.out.println("Продукт " + nameOfCheckedProduct + " не найден.");
@@ -138,7 +138,7 @@ class App {
 
     }
 
-    static boolean check(String name) {
+    static boolean check(Basket basket, String name) {
         return basket.checkProduct(name);
     }
 
