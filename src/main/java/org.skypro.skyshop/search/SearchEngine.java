@@ -4,7 +4,6 @@ import org.skypro.skyshop.exceptions.BestResultNotFound;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 public class SearchEngine {
@@ -20,7 +19,7 @@ public class SearchEngine {
         if (searchString == null || searchString.isEmpty()) {
             throw new IllegalArgumentException("Передана нулевая строка.");
         }
-       //int tempStorageIndex = 0;
+        //int tempStorageIndex = 0;
         for (Searchable searchable : searchStorage) {
             if (searchable.searchTerm().contains(searchString)) {
                 tempStorage.add(searchable);
@@ -49,7 +48,7 @@ public class SearchEngine {
         int indexOfMaxSearches;
         int foundedSubstringsTotal = 0;
 
-        for (Searchable searchable: searchStorage) {
+        for (Searchable searchable : searchStorage) {
             if (searchable != null) {
                 String searchString = searchable.getStringPresentation();
                 int cnt = 0;
@@ -80,7 +79,7 @@ public class SearchEngine {
         int indexOfMaxSearches = -1;
         int indexCnt = 0;
 
-        for (Integer i: cntSearches) {
+        for (Integer i : cntSearches) {
             if (i > maxCntSearch) {
                 maxCntSearch = i;
                 indexOfMaxSearches = indexCnt;
