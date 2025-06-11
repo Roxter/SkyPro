@@ -54,24 +54,7 @@ class App {
         searchProducts.add(product12);
         //System.out.println(searchProducts.getSearchStorage()[0].searchTerm());
 
-        System.out.println();
-        List<Searchable> searchResult1 = searchProducts.search("Яйца");
-        List<Searchable> searchResult2 = searchProducts.search("Молочная продукция");
-        List<Searchable> searchResult3 = searchProducts.search("Мясная продукция");
-        List<Searchable> searchResult4 = searchProducts.search("Хлеб");
-        //List<Searchable> searchResult5 = searchProducts.search(null);
-        //List<Searchable> searchResult6 = searchProducts.search("");
-        System.out.println(Arrays.asList(searchResult1));
-        System.out.println(Arrays.asList(searchResult3));
-        System.out.println(Arrays.asList(searchResult2));
-        System.out.println(Arrays.asList(searchResult4));
-        //System.out.println(Arrays.asList(searchResult5));
-        //System.out.println(Arrays.asList(searchResult6));
-
-        System.out.println();
-        //Searchable searchedObj = searchProducts.getSearchTerm("Груши");
-        Searchable searchedObj = searchProducts.getSearchTerm("Хлеб");
-        System.out.println("Найденный объект: " + searchedObj.searchTerm());
+        testBasket();
     }
 
     static void testBasket() {
@@ -87,7 +70,7 @@ class App {
         FixPriceProduct product8 = new FixPriceProduct("Хлеб");
         FixPriceProduct product9 = new FixPriceProduct("Тушенка");
 
-        System.out.println("Добавление в корзину:");
+        System.out.println("\nДобавление в корзину:");
         basket.addToBasket(product1);
         basket.addToBasket(product2);
         basket.addToBasket(product3);
@@ -98,44 +81,18 @@ class App {
         System.out.println("\nСодержимое корзины:");
         basket.printContent();
 
-        System.out.println("\nСтоимость корзины: \n" + basket.costBasket());
-
-        System.out.println("\nОтдельные продукты корзины:");
-        String nameOfCheckedProduct = "Хлеб";
-        if (check(basket, nameOfCheckedProduct)) {
-            System.out.println("Продукт " + nameOfCheckedProduct + " найден.");
-        } else {
-            System.out.println("Продукт " + nameOfCheckedProduct + " не найден.");
-        }
-
-        nameOfCheckedProduct = "Яйца";
-        if (check(basket, nameOfCheckedProduct)) {
-            System.out.println("Продукт " + nameOfCheckedProduct + " найден.");
-        } else {
-            System.out.println("Продукт " + nameOfCheckedProduct + " не найден.");
-        }
-
-        nameOfCheckedProduct = "Тушенка";
-        if (check(basket, nameOfCheckedProduct)) {
-            System.out.println("Продукт " + nameOfCheckedProduct + " найден.");
-        } else {
-            System.out.println("Продукт " + nameOfCheckedProduct + " не найден.");
-        }
-
-        System.out.println("\nОчистка корзины:");
-        basket.clearBasket();
-        System.out.println("\nСодержимое пустой корзины:");
+        String nameOfDeletedProduct = "Хлеб";
+        System.out.println("\nУдаляем продукт " + nameOfDeletedProduct + "...");
+        List deletedProducts = basket.deleteProduct(nameOfDeletedProduct);
+        System.out.println("\nУдаленные продукты:" + " " + Arrays.asList(deletedProducts));
+        System.out.println("\nСодержимое корзины:");
         basket.printContent();
-        System.out.println("\nСтоимость пустой корзины: \n" + basket.costBasket());
-
-        System.out.println("\nПоиск товара в пустой корзине:");
-        nameOfCheckedProduct = "Тушенка";
-        if (check(basket, nameOfCheckedProduct)) {
-            System.out.println("Продукт " + nameOfCheckedProduct + " найден.");
-        } else {
-            System.out.println("Продукт " + nameOfCheckedProduct + " не найден.");
-        }
-
+        nameOfDeletedProduct = "Чай";
+        System.out.println("\nУдаляем продукт " + nameOfDeletedProduct + "...");
+        deletedProducts = basket.deleteProduct(nameOfDeletedProduct);
+        System.out.println("\nУдаленные продукты:" + " " + Arrays.asList(deletedProducts));
+        System.out.println("\nСодержимое корзины:");
+        basket.printContent();
     }
 
     static boolean check(Basket basket, String name) {

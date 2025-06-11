@@ -1,8 +1,10 @@
 package org.skypro.skyshop.basket;
 
+import io.micrometer.common.util.StringUtils;
 import org.skypro.skyshop.product.Product;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Basket {
@@ -41,12 +43,6 @@ public class Basket {
             return;
         }
         System.out.println("Корзина содержит:");
-        if (products.isEmpty()) {
-            System.out.println("Корзина пуста.");
-        } else {
-            products.clear();
-            System.out.println("Корзина очищена.");
-        }
         for (Product product : products) {
             if (product != null) {
                 System.out.println(product);
@@ -78,5 +74,26 @@ public class Basket {
 
     public void clearBasket() {
 
+    }
+
+    public List deleteProduct(String name) {
+        List<Product> removedProducts = new ArrayList<>();
+
+        if (name == null || StringUtils.isBlank(name)) {
+            throw new IllegalArgumentException("Неверно введено имя продукта");
+        }
+        Iterator<Product> iterator = products.iterator();
+        while (iterator.hasNext()) {
+            Product product = iterator.next();
+            if (product.getName().equals(name)) {
+                removedProducts.add(product);
+            }
+        }
+        if (removedProducts.isEmpty()) {
+            System.out.println("Список продуктов для удаления был пуст.");
+        } else {
+            products.removeAll(removedProducts);
+        }
+        return removedProducts;
     }
 }
