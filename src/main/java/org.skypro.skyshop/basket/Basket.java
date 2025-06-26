@@ -3,22 +3,29 @@ package org.skypro.skyshop.basket;
 import io.micrometer.common.util.StringUtils;
 import org.skypro.skyshop.product.Product;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class Basket {
-    private final List<Product> products;
+    private final Map<String, List<Product>> products;
 
     public Basket() {
-        this.products = new ArrayList<>();
+        this.products = new TreeMap<>();
     }
 
     public void addToBasket(Product product) {
         if (product == null) {
             throw new IllegalArgumentException("Передан неверный продукт. Запись не добавлена");
         }
-        products.add(product);
+        String productName = product.getName();
+        if (products.containsKey(productName)) {
+            List<Product> tempListProd = products.get(productName);
+            tempListProd.add(product);
+            products.put(productName, tempListProd);
+            products.put(productName, tempListProd);
+        } else {
+            List<Product> tempListProd = new ArrayList<>();
+            products.put(productName, tempListProd);
+        }
         System.out.println("Продукт " + product.getName() + " добавлен в корзину.");
     }
 
