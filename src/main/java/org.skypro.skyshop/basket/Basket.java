@@ -17,25 +17,27 @@ public class Basket {
             throw new IllegalArgumentException("Передан неверный продукт. Запись не добавлена");
         }
         String productName = product.getName();
+        List<Product> tempListProd;
         if (products.containsKey(productName)) {
-            List<Product> tempListProd = products.get(productName);
+            tempListProd = products.get(productName);
             tempListProd.add(product);
-            products.put(productName, tempListProd);
-            products.put(productName, tempListProd);
         } else {
-            List<Product> tempListProd = new ArrayList<>();
-            products.put(productName, tempListProd);
+            tempListProd = new ArrayList<>();
         }
+        products.put(productName, tempListProd);
         System.out.println("Продукт " + product.getName() + " добавлен в корзину.");
     }
 
     public int costBasket() {
         int total = 0;
-        for (Product product : products) {
-            if (product != null) {
-                total = total + product.getPrice();
-            } else {
-                break;
+
+        for (Map.Entry<String, List<Product>> product: products.entrySet()) {
+            for (Product prod : product.getValue()) {
+                if (prod != null) {
+                    total = total + prod.getPrice();
+                } else {
+                    break;
+                }
             }
         }
         return total;
@@ -50,15 +52,13 @@ public class Basket {
             return;
         }
         System.out.println("Корзина содержит:");
-        for (Product product : products) {
-            if (product != null) {
+        for (Map.Entry<String, List<Product>> product: products.entrySet()) {
+            for (Product prod : product.getValue()) {
                 System.out.println(product);
-                total = total + product.getPrice();
-                if (product.isSpecial()) {
+                total = total + prod.getPrice();
+                if (prod.isSpecial()) {
                     totalSpecProd = totalSpecProd + 1;
                 }
-            } else {
-                break;
             }
         }
         System.out.println("Итого: " + total);
@@ -70,10 +70,12 @@ public class Basket {
             System.out.println("Корзина пуста.");
             return false;
         }
-        for (Product product : products) {
-            String prodName = product.getName();
-            if (name.equals(prodName)) {
-                return true;
+        for (Map.Entry<String, List<Product>> product: products.entrySet()) {
+            for (Product prod : product.getValue()) {
+                String prodName = prod.getName();
+                if (name.equals(prodName)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -89,17 +91,19 @@ public class Basket {
         if (name == null || StringUtils.isBlank(name)) {
             throw new IllegalArgumentException("Неверно введено имя продукта");
         }
-        Iterator<Product> iterator = products.iterator();
-        while (iterator.hasNext()) {
-            Product product = iterator.next();
-            if (product.getName().equals(name)) {
-                removedProducts.add(product);
+        for (Map.Entry<String, List<Product>> product: products.entrySet()) {
+            Iterator<Product> iterator = product.getValue().iterator();
+            while (iterator.hasNext()) {
+                Product prod = iterator.next();
+                if (prod.getName().equals(name)) {
+                    removedProducts.add(prod);
+                }
             }
-        }
-        if (removedProducts.isEmpty()) {
-            System.out.println("Список продуктов для удаления был пуст.");
-        } else {
-            products.removeAll(removedProducts);
+            if (removedProducts.isEmpty()) {
+                System.out.println("Список продуктов для удаления был пуст.");
+            } else {
+                product.removeAll(removedProducts);
+            }
         }
         return removedProducts;
     }
