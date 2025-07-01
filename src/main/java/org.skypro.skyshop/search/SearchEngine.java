@@ -3,26 +3,30 @@ package org.skypro.skyshop.search;
 import org.skypro.skyshop.exceptions.BestResultNotFound;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class SearchEngine {
-    private final List<Searchable> searchStorage;
+    //private final List<Searchable> searchStorage;
+    private final Map<String, List<Searchable>> searchStorage;
 
     public SearchEngine() {
-        this.searchStorage = new ArrayList<>();
+        this.searchStorage = new TreeMap<>();
     }
 
-    public List<Searchable> search(String searchString) {
-        List<Searchable> tempStorage = new ArrayList<>();
+    public Map<String, List<Searchable>> search(String searchString) {
+        Map<String, List<Searchable>> tempStorage = new TreeMap<>();
 
         if (searchString == null || searchString.isEmpty()) {
             throw new IllegalArgumentException("Передана нулевая строка.");
         }
         //int tempStorageIndex = 0;
-        for (Searchable searchable : searchStorage) {
-            if (searchable.searchTerm().contains(searchString)) {
-                tempStorage.add(searchable);
+        for (Map.Entry<String, List<Searchable>> searchable : searchStorage.entrySet()) {
+            for (Searchable product : searchable.getValue()) {
+                if (product.searchTerm().contains(searchString)) {
+                    tempStorage.put(searchable.getKey(), searchable.getValue());
+                }
             }
         }
         return tempStorage;
@@ -32,46 +36,51 @@ public class SearchEngine {
         if (addedObject == null) {
             throw new IllegalArgumentException("Передан нулевой объект. Добавление отменено");
         }
-        searchStorage.add(addedObject);
+        List<Searchable> tempList = new ArrayList();
+        tempList.add(addedObject);
+        searchStorage.put(addedObject.searchTerm(), tempList);
         System.out.println("Объект " + addedObject + " добавлен в поиск");
     }
 
-    public List<Searchable> getSearchStorage() {
-        List<Searchable> tempStorage = new ArrayList<>();
-
-        Collections.copy(searchStorage, tempStorage);
+    public Map<String, List<Searchable>> getSearchStorage() {
+        //List<Searchable> tempStorage = new ArrayList<>();
+        Map<String, List<Searchable>> tempStorage = new TreeMap<>();
+        tempStorage.putAll(searchStorage);
+        //Collections.copy(searchStorage, tempStorage);
         return tempStorage;
     }
 
-    public Searchable getSearchTerm(String search) {
+    public Searchable getSearchTerm(String inputSearchString) {
         List<Integer> cntSearches = new ArrayList<>();
         int indexOfMaxSearches;
         int foundedSubstringsTotal = 0;
 
-        for (Searchable searchable : searchStorage) {
-            if (searchable != null) {
-                String searchString = searchable.getStringPresentation();
-                int cnt = 0;
-                int index = 0;
-                int indexSubstring = searchString.indexOf(search, index);
-                while (indexSubstring != -1) {
-                    cnt++;
-                    index = indexSubstring + searchString.length();
-                    indexSubstring = searchString.indexOf(search, index);
+        for (Map.Entry<String, List<Searchable>> searchable : searchStorage.entrySet()) {
+            for (Searchable product : searchable.getValue()) {
+                if (product != null) {
+                    String searchString = product.getStringPresentation();
+                    int cnt = 0;
+                    int index = 0;
+                    int indexSubstring = searchString.indexOf(inputSearchString, index);
+                    while (indexSubstring != -1) {
+                        cnt++;
+                        index = indexSubstring + searchString.length();
+                        indexSubstring = searchString.indexOf(inputSearchString, index);
+                    }
+                    cntSearches.add(cnt);
+                    if (cnt > 0) {
+                        foundedSubstringsTotal++;
+                    }
+                } else {
+                    cntSearches.add(0);
                 }
-                cntSearches.add(cnt);
-                if (cnt > 0) {
-                    foundedSubstringsTotal++;
-                }
-            } else {
-                cntSearches.add(0);
             }
         }
         if (foundedSubstringsTotal < 1) {
             throw new BestResultNotFound("Не найден ни один из объектов");
         }
         indexOfMaxSearches = findOfMaxSearches(cntSearches);
-        return searchStorage.get(indexOfMaxSearches);
+        return searchStorage.get(searchStorage).get(indexOfMaxSearches);
     }
 
     private int findOfMaxSearches(List<Integer> cntSearches) {

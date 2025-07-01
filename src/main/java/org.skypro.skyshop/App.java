@@ -14,7 +14,7 @@ class App {
 
     public static void main(String[] args) {
         testProducts();
-
+        testBasket();
     }
 
     static void testProducts() {
@@ -52,8 +52,6 @@ class App {
         searchProducts.add(product11);
         searchProducts.add(product12);
         //System.out.println(searchProducts.getSearchStorage()[0].searchTerm());
-
-        testBasket();
     }
 
     static void testBasket() {
