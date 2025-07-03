@@ -3,16 +3,13 @@ package org.skypro.skyshop.basket;
 import io.micrometer.common.util.StringUtils;
 import org.skypro.skyshop.product.Product;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Basket {
     private final Map<String, List<Product>> productStorage;
 
     public Basket() {
-        this.productStorage = new TreeMap<>();
+        this.productStorage = new HashMap<>();
     }
 
     public void addToBasket(Product product) {
@@ -38,8 +35,6 @@ public class Basket {
             for (Product prod : product.getValue()) {
                 if (prod != null) {
                     total = total + prod.getPrice();
-                } else {
-                    break;
                 }
             }
         }
@@ -84,13 +79,8 @@ public class Basket {
         return false;
     }
 
-    public void clearBasket() {
-
-    }
-
     public List deleteProduct(String name) {
         List<Product> removedProducts = new ArrayList<>();
-        Map<String, List<Product>> tempListProd = new TreeMap<>();
         String currProdKey = null;
         List<Product> currProdValue;
 
@@ -101,17 +91,8 @@ public class Basket {
             currProdKey = product.getKey();
             currProdValue = product.getValue();
             if (currProdKey.equals(name)) {
-                tempListProd.put(currProdKey, currProdValue);
                 removedProducts.addAll(currProdValue);
                 break;
-                /**
-                 Iterator<Product> iterator = product.getValue().iterator();
-                 while (iterator.hasNext()) {
-                 Product prod = iterator.next();
-                 if (prod.getName().equals(name)) {
-                 removedProducts.add(prod);
-                 }
-                 }**/
             }
         }
 

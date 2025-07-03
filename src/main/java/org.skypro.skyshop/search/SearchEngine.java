@@ -2,21 +2,18 @@ package org.skypro.skyshop.search;
 
 import org.skypro.skyshop.exceptions.BestResultNotFound;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class SearchEngine {
     //private final List<Searchable> searchStorage;
     private final Map<String, List<Searchable>> searchStorage;
 
     public SearchEngine() {
-        this.searchStorage = new TreeMap<>();
+        this.searchStorage = new HashMap<>();
     }
 
     public Map<String, List<Searchable>> search(String searchString) {
-        Map<String, List<Searchable>> tempStorage = new TreeMap<>();
+        Map<String, List<Searchable>> tempStorage = new HashMap<>();
 
         if (searchString == null || searchString.isEmpty()) {
             throw new IllegalArgumentException("Передана нулевая строка.");
@@ -44,7 +41,7 @@ public class SearchEngine {
 
     public Map<String, List<Searchable>> getSearchStorage() {
         //List<Searchable> tempStorage = new ArrayList<>();
-        Map<String, List<Searchable>> tempStorage = new TreeMap<>();
+        Map<String, List<Searchable>> tempStorage = new HashMap<>();
         tempStorage.putAll(searchStorage);
         //Collections.copy(searchStorage, tempStorage);
         return tempStorage;
