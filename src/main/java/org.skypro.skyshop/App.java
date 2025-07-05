@@ -38,20 +38,22 @@ class App {
         Article product12 = new Article("Мясная продукция", "Курица");
 
         System.out.println();
-        SearchEngine searchProducts = new SearchEngine();
-        searchProducts.add(product1);
-        searchProducts.add(product2);
-        searchProducts.add(product3);
-        searchProducts.add(product4);
-        searchProducts.add(product5);
-        searchProducts.add(product6);
-        searchProducts.add(product7);
-        searchProducts.add(product8);
-        searchProducts.add(product9);
-        searchProducts.add(product10);
-        searchProducts.add(product11);
-        searchProducts.add(product12);
-        //System.out.println(searchProducts.getSearchStorage()[0].searchTerm());
+        SearchEngine searcher = new SearchEngine();
+        searcher.add(product1);
+        searcher.add(product2);
+        searcher.add(product3);
+        searcher.add(product4);
+        searcher.add(product5);
+        searcher.add(product6);
+        searcher.add(product7);
+        searcher.add(product8);
+        searcher.add(product9);
+        searcher.add(product10);
+        searcher.add(product11);
+        searcher.add(product12);
+        //System.out.println(searcher.getSearchStorage()[0].searchTerm());
+        String searchString = "Я";
+        System.out.println("\nПоиск продуктов с именем: \"" + searchString + "\":\n" + searcher.search(searchString));
     }
 
     static void testBasket() {

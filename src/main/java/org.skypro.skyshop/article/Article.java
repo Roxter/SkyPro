@@ -3,7 +3,7 @@ package org.skypro.skyshop.article;
 import io.micrometer.common.util.StringUtils;
 import org.skypro.skyshop.search.Searchable;
 
-public final class Article implements Searchable {
+public final class Article implements Searchable, Comparable<Article> {
     private final String name;
     private final String text;
 
@@ -32,8 +32,23 @@ public final class Article implements Searchable {
     }
 
     @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
     public String toString() {
         return getName() +
                 "\n" + getText();
+    }
+
+    @Override
+    public int compareTo(Article o) {
+        return name.compareTo(o.name);
     }
 }

@@ -13,7 +13,7 @@ public class SearchEngine {
     }
 
     public Map<String, List<Searchable>> search(String searchString) {
-        Map<String, List<Searchable>> tempStorage = new HashMap<>();
+        Map<String, List<Searchable>> tempStorage = new TreeMap<>();
 
         if (searchString == null || searchString.isEmpty()) {
             throw new IllegalArgumentException("Передана нулевая строка.");
