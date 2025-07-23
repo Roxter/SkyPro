@@ -19,16 +19,19 @@ public class Basket {
         if (product == null) {
             throw new IllegalArgumentException("Передан неверный продукт. Запись не добавлена");
         }
-        String productName = product.getName();
-        List<Product> tempListProd;
+        /*List<Product> tempListProd;
         if (productStorage.containsKey(productName)) {
             tempListProd = productStorage.get(productName);
         } else {
             tempListProd = new ArrayList<>();
         }
         tempListProd.add(product);
-        productStorage.put(productName, tempListProd);
-        System.out.println("Продукт " + product.getName() + " добавлен в корзину.");
+        productStorage.put(productName, tempListProd);*/
+
+        String productName = product.getName();
+        productStorage.computeIfPresent(productName, (k, v) -> v = productStorage.get(k));
+        productStorage.computeIfAbsent(productName, (v) -> new ArrayList<>());
+        System.out.println("Продукт " + productName + " добавлен в корзину.");
     }
 
     public int costBasket() {
