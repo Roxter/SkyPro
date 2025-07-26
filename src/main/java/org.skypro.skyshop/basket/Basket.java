@@ -30,7 +30,7 @@ public class Basket {
 
         String productName = product.getName();
         productStorage.computeIfPresent(productName, (k, v) -> v = productStorage.get(k));
-        productStorage.computeIfAbsent(productName, (v) -> new ArrayList<>());
+        productStorage.computeIfAbsent(productName, v -> new ArrayList<>()).add(product);
         System.out.println("Продукт " + productName + " добавлен в корзину.");
     }
 
@@ -91,7 +91,7 @@ public class Basket {
 
     }
 
-    public List deleteProduct(String name) {
+    public List<Product> deleteProduct(String name) {
         List<Product> removedProducts = new ArrayList<>();
         Map<String, List<Product>> tempListProd = new TreeMap<>();
         String currProdKey = null;
@@ -107,14 +107,6 @@ public class Basket {
                 tempListProd.put(currProdKey, currProdValue);
                 removedProducts.addAll(currProdValue);
                 break;
-                /**
-                 Iterator<Product> iterator = product.getValue().iterator();
-                 while (iterator.hasNext()) {
-                 Product prod = iterator.next();
-                 if (prod.getName().equals(name)) {
-                 removedProducts.add(prod);
-                 }
-                 }**/
             }
         }
 
