@@ -8,7 +8,6 @@ import org.skypro.skyshop.product.SimpleProduct;
 import org.skypro.skyshop.search.SearchEngine;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 
 class App {
@@ -53,6 +52,8 @@ class App {
         searchProducts.add(product11);
         searchProducts.add(product12);
         //System.out.println(searchProducts.getSearchStorage()[0].searchTerm());
+        System.out.println("Содержимое поискового движка:");
+        System.out.println(searchProducts.getSearchStorage());
     }
 
     static void testBasket() {
