@@ -9,6 +9,7 @@ import org.skypro.skyshop.search.SearchEngine;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 class App {
 
@@ -63,9 +64,10 @@ class App {
         DiscountedProduct product4 = new DiscountedProduct("Масло", 327, 30);
         DiscountedProduct product5 = new DiscountedProduct("Хлеб", 49, 50);
         DiscountedProduct product6 = new DiscountedProduct("Тушенка", 235, 26);
-        FixPriceProduct product7 = new FixPriceProduct("Масло");
+        DiscountedProduct product7 = new DiscountedProduct("Тушенка", 235, 26);
+        /*FixPriceProduct product7 = new FixPriceProduct("Масло");
         FixPriceProduct product8 = new FixPriceProduct("Хлеб");
-        FixPriceProduct product9 = new FixPriceProduct("Тушенка");
+        FixPriceProduct product9 = new FixPriceProduct("Тушенка");*/
 
         System.out.println("\nДобавление в корзину:");
         basket.addToBasket(product1);
@@ -74,13 +76,14 @@ class App {
         basket.addToBasket(product4);
         basket.addToBasket(product5);
         basket.addToBasket(product6);
+        basket.addToBasket(product7);
 
         System.out.println("\nСодержимое корзины:");
         basket.printContent();
 
         String nameOfDeletedProduct = "Хлеб";
         System.out.println("\nУдаляем продукт " + nameOfDeletedProduct + "...");
-        List deletedProducts = basket.deleteProduct(nameOfDeletedProduct);
+        Set deletedProducts = basket.deleteProduct(nameOfDeletedProduct);
         System.out.println("\nУдаленные продукты:" + " " + Arrays.asList(deletedProducts));
         System.out.println("\nСодержимое корзины:");
         basket.printContent();

@@ -3,13 +3,10 @@ package org.skypro.skyshop.basket;
 import io.micrometer.common.util.StringUtils;
 import org.skypro.skyshop.product.Product;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Basket {
-    private final Map<String, List<Product>> productStorage;
+    private final Map<String, Set<Product>> productStorage;
 
     public Basket() {
         this.productStorage = new TreeMap<>();
@@ -30,14 +27,14 @@ public class Basket {
 
         String productName = product.getName();
         productStorage.computeIfPresent(productName, (k, v) -> v = productStorage.get(k));
-        productStorage.computeIfAbsent(productName, v -> new ArrayList<>()).add(product);
+        productStorage.computeIfAbsent(productName, v -> new HashSet<>()).add(product);
         System.out.println("Продукт " + productName + " добавлен в корзину.");
     }
 
     public int costBasket() {
         int total = 0;
 
-        for (Map.Entry<String, List<Product>> product : productStorage.entrySet()) {
+        for (Map.Entry<String, Set<Product>> product : productStorage.entrySet()) {
             for (Product prod : product.getValue()) {
                 if (prod != null) {
                     total = total + prod.getPrice();
@@ -58,7 +55,7 @@ public class Basket {
             return;
         }
         System.out.println("Корзина содержит:");
-        for (Map.Entry<String, List<Product>> product : productStorage.entrySet()) {
+        for (Map.Entry<String, Set<Product>> product : productStorage.entrySet()) {
             for (Product prod : product.getValue()) {
                 System.out.println(prod);
                 total = total + prod.getPrice();
@@ -76,7 +73,7 @@ public class Basket {
             System.out.println("Корзина пуста.");
             return false;
         }
-        for (Map.Entry<String, List<Product>> product : productStorage.entrySet()) {
+        for (Map.Entry<String, Set<Product>> product : productStorage.entrySet()) {
             for (Product prod : product.getValue()) {
                 String prodName = prod.getName();
                 if (name.equals(prodName)) {
@@ -91,20 +88,20 @@ public class Basket {
 
     }
 
-    public List<Product> deleteProduct(String name) {
-        List<Product> removedProducts = new ArrayList<>();
-        Map<String, List<Product>> tempListProd = new TreeMap<>();
+    public Set<Product> deleteProduct(String name) {
+        Set<Product> removedProducts = new HashSet<>();
+        Map<String, Set<Product>> tempListProd = new TreeMap<>();
         String currProdKey = null;
-        List<Product> currProdValue;
+        Set<Product> currProdValue;
 
         if (name == null || StringUtils.isBlank(name)) {
             throw new IllegalArgumentException("Неверно введено имя продукта");
         }
-        for (Map.Entry<String, List<Product>> product : productStorage.entrySet()) {
+        for (Map.Entry<String, Set<Product>> product : productStorage.entrySet()) {
             currProdKey = product.getKey();
             currProdValue = product.getValue();
             if (currProdKey.equals(name)) {
-                tempListProd.put(currProdKey, currProdValue);
+                tempListProd.put(product.getKey(), product.getValue());
                 removedProducts.addAll(currProdValue);
                 break;
             }
