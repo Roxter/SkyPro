@@ -85,13 +85,13 @@ class App {
         String nameOfDeletedProduct = "Хлеб";
         System.out.println("\nУдаляем продукт " + nameOfDeletedProduct + "...");
         Set deletedProducts = basket.deleteProduct(nameOfDeletedProduct);
-        System.out.println("\nУдаленные продукты:" + " " + Arrays.asList(deletedProducts));
+        System.out.println("\nУдаленные продукты:" + " " + deletedProducts);
         System.out.println("\nСодержимое корзины:");
         basket.printContent();
         nameOfDeletedProduct = "Чай";
         System.out.println("\nУдаляем продукт " + nameOfDeletedProduct + "...");
         deletedProducts = basket.deleteProduct(nameOfDeletedProduct);
-        System.out.println("\nУдаленные продукты:" + " " + Arrays.asList(deletedProducts));
+        System.out.println("\nУдаленные продукты:" + " " + deletedProducts);
         System.out.println("\nСодержимое корзины:");
         basket.printContent();
     }
