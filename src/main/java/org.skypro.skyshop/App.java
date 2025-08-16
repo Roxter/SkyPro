@@ -4,10 +4,10 @@ import org.skypro.skyshop.article.Article;
 import org.skypro.skyshop.basket.Basket;
 import org.skypro.skyshop.product.DiscountedProduct;
 import org.skypro.skyshop.product.FixPriceProduct;
+import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct;
 import org.skypro.skyshop.search.SearchEngine;
 
-import java.util.Arrays;
 import java.util.Set;
 
 class App {
@@ -84,7 +84,7 @@ class App {
 
         String nameOfDeletedProduct = "Хлеб";
         System.out.println("\nУдаляем продукт " + nameOfDeletedProduct + "...");
-        Set deletedProducts = basket.deleteProduct(nameOfDeletedProduct);
+        Set<Product> deletedProducts = basket.deleteProduct(nameOfDeletedProduct);
         System.out.println("\nУдаленные продукты:" + " " + deletedProducts);
         System.out.println("\nСодержимое корзины:");
         basket.printContent();

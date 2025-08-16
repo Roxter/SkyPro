@@ -13,7 +13,7 @@ public class SearchEngine {
     }
 
     public Set<Searchable> search(String searchString) {
-        Set<Searchable> tempStorage = new TreeSet(new ReverseStringComparator());
+        Set<Searchable> tempStorage = new TreeSet<>(new ReverseStringComparator());
 
         if (searchString == null || searchString.isEmpty()) {
             throw new IllegalArgumentException("Передана нулевая строка.");
@@ -48,7 +48,7 @@ class ReverseStringComparator implements Comparator<Searchable> {
     public int compare(Searchable s1, Searchable s2) {
         String name1 = s1.searchTerm();
         String name2 = s2.searchTerm();
-        Integer comp = Integer.compare(name1.length(), name2.length());
+        int comp = Integer.compare(name1.length(), name2.length());
 
         if (comp != 0) {
             return comp;
