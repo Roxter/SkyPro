@@ -1,7 +1,11 @@
 package org.skypro.skyshop.search;
 
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class SearchEngine {
     //private final List<Searchable> searchStorage;
@@ -12,17 +16,15 @@ public class SearchEngine {
     }
 
     public Set<Searchable> search(String searchString) {
-        Set<Searchable> tempStorage = new TreeSet<>(new ReverseStringComparator());
-
         if (searchString == null || searchString.isEmpty()) {
             throw new IllegalArgumentException("Передана нулевая строка.");
         }
-        //int tempStorageIndex = 0;
-        for (Searchable searchable : searchStorage) {
-            if (searchable.searchTerm().contains(searchString)) {
-                tempStorage.add(searchable);
-            }
-        }
+
+        Comparator<Searchable> reverseComparator = new ReverseStringComparator();
+        Supplier<TreeSet<Searchable>> treeSetSupplier = () -> new TreeSet<>(reverseComparator);
+        Set<Searchable> tempStorage = searchStorage.stream()
+                .filter(searchable -> searchable.searchTerm().contains(searchString))
+                .collect(Collectors.toCollection(treeSetSupplier));
         return tempStorage;
     }
 

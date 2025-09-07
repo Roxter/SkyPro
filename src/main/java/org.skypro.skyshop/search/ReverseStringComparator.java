@@ -1,6 +1,7 @@
 package org.skypro.skyshop.search;
 
 import java.util.Comparator;
+import java.util.function.Supplier;
 
 public class ReverseStringComparator implements Comparator<Searchable> {
 

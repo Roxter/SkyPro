@@ -3,10 +3,8 @@ package org.skypro.skyshop.basket;
 import io.micrometer.common.util.StringUtils;
 import org.skypro.skyshop.product.Product;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Basket {
     private final Map<String, Set<Product>> productStorage;
@@ -19,15 +17,6 @@ public class Basket {
         if (product == null) {
             throw new IllegalArgumentException("Передан неверный продукт. Запись не добавлена");
         }
-        /*List<Product> tempListProd;
-        if (productStorage.containsKey(productName)) {
-            tempListProd = productStorage.get(productName);
-        } else {
-            tempListProd = new ArrayList<>();
-        }
-        tempListProd.add(product);
-        productStorage.put(productName, tempListProd);*/
-
         String productName = product.getName();
         productStorage.computeIfPresent(productName, (k, v) -> v = productStorage.get(k));
         productStorage.computeIfAbsent(productName, v -> new HashSet<>()).add(product);
@@ -35,18 +24,14 @@ public class Basket {
     }
 
     public int costBasket() {
-        int total = 0;
-
-        for (Map.Entry<String, Set<Product>> product : productStorage.entrySet()) {
-            for (Product prod : product.getValue()) {
-                if (prod != null) {
-                    total = total + prod.getPrice();
-                } else {
-                    break;
-                }
-            }
-        }
-        return total;
+        return productStorage.entrySet()
+                .stream()
+                .filter(Objects::nonNull)
+                .flatMap(element -> element.getValue()
+                        .stream()
+                        .filter(Objects::nonNull))
+                .mapToInt(product -> product.getPrice())
+                .sum();
     }
 
     public void printContent() {
@@ -58,15 +43,15 @@ public class Basket {
             return;
         }
         System.out.println("Корзина содержит:");
+
         for (Map.Entry<String, Set<Product>> product : productStorage.entrySet()) {
-            for (Product prod : product.getValue()) {
-                System.out.println(prod);
-                total = total + prod.getPrice();
-                if (prod.isSpecial()) {
-                    totalSpecProd = totalSpecProd + 1;
-                }
-            }
+            total = total + product.getValue()
+                    .stream()
+                    .filter(Objects::nonNull)
+                    .mapToInt(productMap -> productMap.getPrice())
+                    .sum();
         }
+        totalSpecProd = getSpecialCount();
         System.out.println("Итого: " + total);
         System.out.println("Специальных товаров: " + totalSpecProd);
     }
@@ -87,10 +72,6 @@ public class Basket {
         return false;
     }
 
-    public void clearBasket() {
-
-    }
-
     public Set<Product> deleteProduct(String name) {
         Set<Product> removedProducts = new HashSet<>();
         Map<String, Set<Product>> tempListProd = new TreeMap<>();
@@ -100,6 +81,7 @@ public class Basket {
         if (name == null || StringUtils.isBlank(name)) {
             throw new IllegalArgumentException("Неверно введено имя продукта");
         }
+
         for (Map.Entry<String, Set<Product>> product : productStorage.entrySet()) {
             currProdKey = product.getKey();
             currProdValue = product.getValue();
@@ -117,5 +99,18 @@ public class Basket {
         }
 
         return removedProducts;
+    }
+
+    private int getSpecialCount() {
+        long count = productStorage.entrySet()
+                .stream()
+                .filter(Objects::nonNull)
+                .flatMap(element -> element.getValue()
+                        .stream()
+                        .filter(Objects::nonNull)
+                        .filter(Product::isSpecial))
+                .mapToInt(product -> product.getPrice())
+                .count();
+        return Long.valueOf(count).intValue();
     }
 }

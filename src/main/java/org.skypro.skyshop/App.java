@@ -81,6 +81,8 @@ class App {
 
         System.out.println("\nСодержимое корзины:");
         basket.printContent();
+        System.out.print("Стоимость корзины: ");
+        System.out.println(basket.costBasket());
 
         String nameOfDeletedProduct = "Хлеб";
         System.out.println("\nУдаляем продукт " + nameOfDeletedProduct + "...");
@@ -88,12 +90,17 @@ class App {
         System.out.println("\nУдаленные продукты:" + " " + deletedProducts);
         System.out.println("\nСодержимое корзины:");
         basket.printContent();
+        System.out.print("Стоимость корзины: ");
+        System.out.println(basket.costBasket());
+
         nameOfDeletedProduct = "Чай";
         System.out.println("\nУдаляем продукт " + nameOfDeletedProduct + "...");
         deletedProducts = basket.deleteProduct(nameOfDeletedProduct);
         System.out.println("\nУдаленные продукты:" + " " + deletedProducts);
         System.out.println("\nСодержимое корзины:");
         basket.printContent();
+        System.out.print("Стоимость корзины: ");
+        System.out.println(basket.costBasket());
     }
 
     static boolean check(Basket basket, String name) {
