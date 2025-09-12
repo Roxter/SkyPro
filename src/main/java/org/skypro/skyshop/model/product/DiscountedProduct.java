@@ -1,10 +1,13 @@
-package org.skypro.skyshop.product;
+package org.skypro.skyshop.model.product;
+
+import java.util.UUID;
 
 public class DiscountedProduct extends Product {
     private final int baseCost;
     private final int discountInPerc;
+    private final UUID id;
 
-    public DiscountedProduct(String name, int baseCost, int discountInPer) {
+    public DiscountedProduct(String name, int baseCost, int discountInPer, UUID id) {
         super(name);
         if (baseCost <= 1) {
             throw new IllegalArgumentException("Неверно введена базовая стоимость");
@@ -14,6 +17,7 @@ public class DiscountedProduct extends Product {
             throw new IllegalArgumentException("Неверно введена стоимость скидки");
         }
         this.discountInPerc = discountInPer;
+        this.id = id;
     }
 
     @Override
@@ -21,6 +25,11 @@ public class DiscountedProduct extends Product {
         double perInverter = 1.0;
         double perMux = 100.0;
         return (int) (baseCost * (perMux - discountInPerc / perMux));
+    }
+
+    @Override
+    public UUID getId() {
+        return id;
     }
 
     @Override

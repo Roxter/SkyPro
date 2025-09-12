@@ -1,20 +1,24 @@
-package org.skypro.skyshop.article;
+package org.skypro.skyshop.model.article;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.micrometer.common.util.StringUtils;
-import org.skypro.skyshop.search.Searchable;
+import org.skypro.skyshop.model.search.Searchable;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public final class Article implements Searchable {
     private final String name;
     private final String text;
+    private final UUID id;
 
-    public Article(String name, String text) {
+    public Article(String name, String text, UUID id) {
         if (name == null || StringUtils.isBlank(name)) {
             throw new IllegalArgumentException("Неверно введено имя стаьи");
         }
         this.name = name;
         this.text = text;
+        this.id = id;
     }
 
     public String getName() {
@@ -25,12 +29,19 @@ public final class Article implements Searchable {
         return text;
     }
 
+    @JsonIgnore
     public String searchTerm() {
         return name + " " + text;
     }
 
+    @JsonIgnore
     public String contentType() {
         return "Article";
+    }
+
+    @Override
+    public UUID getId() {
+        return id;
     }
 
     @Override

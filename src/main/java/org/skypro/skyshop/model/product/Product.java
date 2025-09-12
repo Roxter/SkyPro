@@ -1,7 +1,8 @@
-package org.skypro.skyshop.product;
+package org.skypro.skyshop.model.product;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.micrometer.common.util.StringUtils;
-import org.skypro.skyshop.search.Searchable;
+import org.skypro.skyshop.model.search.Searchable;
 
 import java.util.Objects;
 
@@ -19,10 +20,12 @@ public abstract class Product implements Searchable {
         return name;
     }
 
+    @JsonIgnore
     public String searchTerm() {
         return name;
     }
 
+    @JsonIgnore
     public String contentType() {
         return "Product";
     }
