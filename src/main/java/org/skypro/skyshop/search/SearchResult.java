@@ -1,4 +1,4 @@
-package org.skypro.skyshop.model.search;
+package org.skypro.skyshop.search;
 
 public class SearchResult {
     private final String id;
@@ -17,9 +17,9 @@ public class SearchResult {
         }
 
         return new SearchResult(
-                searchable.getId().toString(),
-                searchable.searchTerm(),
-                searchable.contentType()
+            searchable.getId().toString(),
+            searchable.searchTerm(),
+            searchable.contentType()
         );
     }
 

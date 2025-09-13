@@ -24,7 +24,7 @@ public class DiscountedProduct extends Product {
     public int getPrice() {
         double perInverter = 1.0;
         double perMux = 100.0;
-        return (int) (baseCost * (perMux - discountInPerc / perMux));
+        return (int) (baseCost * (perInverter - discountInPerc / perMux));
     }
 
     @Override
@@ -40,7 +40,7 @@ public class DiscountedProduct extends Product {
     @Override
     public String toString() {
         return getName() +
-                ": " + getPrice() +
-                "р. (" + discountInPerc + "%)";
+            ": " + getPrice() +
+            "р. (" + discountInPerc + "%)";
     }
 }

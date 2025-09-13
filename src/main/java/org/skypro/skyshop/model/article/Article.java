@@ -2,7 +2,7 @@ package org.skypro.skyshop.model.article;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.micrometer.common.util.StringUtils;
-import org.skypro.skyshop.model.search.Searchable;
+import org.skypro.skyshop.search.Searchable;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -55,11 +55,11 @@ public final class Article implements Searchable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Article article = (Article) o;
-        return Objects.equals(name, article.name);
+        return Objects.equals(getId(), article.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(getId());
     }
 }

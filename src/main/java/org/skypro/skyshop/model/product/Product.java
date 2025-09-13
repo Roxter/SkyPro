@@ -2,7 +2,7 @@ package org.skypro.skyshop.model.product;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.micrometer.common.util.StringUtils;
-import org.skypro.skyshop.model.search.Searchable;
+import org.skypro.skyshop.search.Searchable;
 
 import java.util.Objects;
 
@@ -39,7 +39,7 @@ public abstract class Product implements Searchable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(name, product.name);
+        return Objects.equals(getId(), product.getId());
     }
 
     @Override
