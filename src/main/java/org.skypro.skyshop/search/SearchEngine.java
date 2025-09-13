@@ -1,6 +1,7 @@
 package org.skypro.skyshop.search;
 
-import java.util.Collection;
+import org.skypro.skyshop.model.search.Searchable;
+
 import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
