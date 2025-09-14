@@ -75,4 +75,8 @@ public class StorageService {
             articleStorageMap.values().stream()
         );
     }
+
+    public Optional<Product> getProductById(UUID id) {
+        return Optional.ofNullable(productStorageMap.get(id));
+    }
 }
