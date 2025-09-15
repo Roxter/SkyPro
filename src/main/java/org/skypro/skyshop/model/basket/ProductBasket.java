@@ -3,6 +3,7 @@ package org.skypro.skyshop.model.basket;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -27,6 +28,6 @@ public class ProductBasket {
     }
 
     public Map<UUID, Integer> getContent() {
-        return productStorageBasket;
+        return Collections.unmodifiableMap(productStorageBasket);
     }
 }
