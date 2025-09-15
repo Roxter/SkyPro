@@ -29,22 +29,12 @@ public class StorageService {
             );
     }
 
-    public TreeSet<Product> getProductStorage() {
-        return productStorageMap.values()
-            .stream()
-            .collect(Collectors.toCollection(
-                () -> new TreeSet<>(Comparator.comparing(Product::getName))
-                )
-            );
+    public List<Product> getProductStorage() {
+        return new ArrayList<>(productStorageMap.values());
     }
 
-    public TreeSet<Article> getArticleStorage() {
-        return articleStorageMap.values()
-            .stream()
-            .collect(
-                Collectors.toCollection(
-                    () -> new TreeSet<>(Comparator.comparing(Article::getName)))
-            );
+    public List<Article> getArticleStorage() {
+        return new ArrayList<>(articleStorageMap.values());
     }
 
     private Product[] fillProductStorageTestData() {

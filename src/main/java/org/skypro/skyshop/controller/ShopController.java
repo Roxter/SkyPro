@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
-import java.util.TreeSet;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -29,12 +29,12 @@ public class ShopController {
     }
 
     @GetMapping("/products")
-    public TreeSet<Product> getAllProducts() {
+    public List<Product> getAllProducts() {
         return storageService.getProductStorage();
     }
 
     @GetMapping("/articles")
-    public TreeSet<Article> getAllArticles() {
+    public List<Article> getAllArticles() {
         return storageService.getArticleStorage();
     }
 
