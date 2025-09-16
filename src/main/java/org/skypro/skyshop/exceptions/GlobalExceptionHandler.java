@@ -10,7 +10,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(NoSuchProductException.class)
     public ResponseEntity<ShopError> handleNoSuchProductException(NoSuchProductException e) {
-        ShopError shopError = new ShopError("NO_SUCH_PRODUCT_WITH_THIS_ID", "Продукт с таким id не найден");
+        ShopError shopError = new ShopError("NO_SUCH_PRODUCT_WITH_THIS_ID", "Продукт с id " + e.getId() + " не найден");
         return new ResponseEntity<>(shopError, HttpStatus.NOT_FOUND);
     }
 }

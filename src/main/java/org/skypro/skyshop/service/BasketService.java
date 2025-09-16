@@ -27,7 +27,7 @@ public class BasketService {
         if (optionalProduct.isPresent()) {
             productBasket.addToBasket(id);
         } else {
-            throw new NoSuchProductException("Продукт с ID " + id + " не найден");
+            throw new NoSuchProductException(id);
         }
     }
 
@@ -40,7 +40,7 @@ public class BasketService {
                 int count = uuidIntegerEntry.getValue();
                 Optional<Product> optionalProduct = storageService.getProductById(productID);
                 if (optionalProduct.isEmpty()) {
-                   throw new NoSuchProductException("Продукт с ID " + productID + " не найден");
+                   throw new NoSuchProductException(productID);
                 }
                 Product product = optionalProduct.get();
                 return new BasketItem(product, count);
