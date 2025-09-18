@@ -1,4 +1,4 @@
-package org.skypro.skyshop.service;
+package org.skypro.skyshop;
 
 import org.skypro.skyshop.exceptions.NoSuchProductException;
 import org.skypro.skyshop.model.basket.BasketItem;
