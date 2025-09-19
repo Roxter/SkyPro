@@ -18,12 +18,6 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class ExaminerServiceImplTest {
 
-    @Mock
-    private QuestionService questionService;
-
-    @InjectMocks
-    private ExaminerServiceImpl examinerService;
-
     private final List<Question> MOCK_QUESTIONS = List.of(
         new Question("Question 1",
             "Answer 1"),
@@ -34,6 +28,10 @@ class ExaminerServiceImplTest {
         new Question("Question 4",
             "Answer 4")
     );
+    @Mock
+    private QuestionService questionService;
+    @InjectMocks
+    private ExaminerServiceImpl examinerService;
 
     @Test
     void getQuestions_shouldReturnCorrectAmountOfUniqueQuestions() {
