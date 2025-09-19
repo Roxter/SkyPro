@@ -1,10 +1,10 @@
-package org.skypro.skyshop.exceptions;
+package pro.sky.java.course2.examinerservice.exception;
 
-public final class ShopError {
+public class ResponseError {
     private String code;
     private String message;
 
-    public ShopError(String code, String message) {
+    public ResponseError(String code, String message) {
         this.code = code;
         this.message = message;
     }
