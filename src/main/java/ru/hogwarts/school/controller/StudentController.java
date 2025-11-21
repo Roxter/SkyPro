@@ -29,6 +29,15 @@ public class StudentController {
         return studentService.createStudent(student);
     }
 
+    @PutMapping()
+    public ResponseEntity<Student> updateFaculty(@RequestBody Student student) {
+        Student foundStudent = studentService.updateStudent(student);
+        if (foundStudent == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(foundStudent);
+    }
+
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
         studentService.deleteById(id);

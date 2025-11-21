@@ -18,7 +18,11 @@ public class FacultyService {
     }
 
     public Faculty findById(Long id) {
-        return facultyRepository.findById(id).get();
+        return facultyRepository.findById(id).orElse(null);
+    }
+
+    public Faculty updateFaculty(Faculty faculty) {
+        return facultyRepository.save(faculty);
     }
 
     public void deleteById(Long id) {

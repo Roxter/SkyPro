@@ -18,7 +18,11 @@ public class StudentService {
     }
 
     public Student findById(Long id) {
-        return studentRepository.findById(id).get();
+        return studentRepository.findById(id).orElse(null);
+    }
+
+    public Student updateStudent(Student student) {
+        return studentRepository.save(student);
     }
 
     public void deleteById(Long id) {
