@@ -29,7 +29,7 @@ public class FacultyController {
         return facultyService.createFaculty(faculty);
     }
 
-    @PutMapping()
+    @PutMapping
     public ResponseEntity<Faculty> updateFaculty(@RequestBody Faculty faculty) {
         Faculty foundFaculty = facultyService.updateFaculty(faculty);
         if (foundFaculty == null) {
@@ -40,7 +40,9 @@ public class FacultyController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteFaculty(@PathVariable Long id) {
-        facultyService.deleteById(id);
-        return ResponseEntity.ok().build();
+        if (facultyService.deleteById(id)) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }

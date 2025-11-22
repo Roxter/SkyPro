@@ -40,7 +40,9 @@ public class StudentController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
-        studentService.deleteById(id);
-        return ResponseEntity.ok().build();
+        if (studentService.deleteById(id)) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }

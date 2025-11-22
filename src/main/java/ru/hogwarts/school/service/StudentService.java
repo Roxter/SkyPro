@@ -1,6 +1,7 @@
 package ru.hogwarts.school.service;
 
 import org.springframework.stereotype.Service;
+import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
 
@@ -22,10 +23,17 @@ public class StudentService {
     }
 
     public Student updateStudent(Student student) {
-        return studentRepository.save(student);
+        if (studentRepository.existsById(student.getId())) {
+            return studentRepository.save(student);
+        }
+        return null;
     }
 
-    public void deleteById(Long id) {
-        studentRepository.deleteById(id);
+    public boolean deleteById(Long id) {
+        if (studentRepository.existsById(id)) {
+            studentRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

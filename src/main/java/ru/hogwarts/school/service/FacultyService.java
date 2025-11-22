@@ -22,10 +22,17 @@ public class FacultyService {
     }
 
     public Faculty updateFaculty(Faculty faculty) {
-        return facultyRepository.save(faculty);
+        if (facultyRepository.existsById(faculty.getId())) {
+            return facultyRepository.save(faculty);
+        }
+        return null;
     }
 
-    public void deleteById(Long id) {
-        facultyRepository.deleteById(id);
+    public boolean deleteById(Long id) {
+        if (facultyRepository.existsById(id)) {
+            facultyRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }
