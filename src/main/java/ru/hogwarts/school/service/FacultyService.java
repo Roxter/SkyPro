@@ -14,6 +14,7 @@ public class FacultyService {
     }
 
     public Faculty createFaculty(Faculty faculty) {
+        faculty.setId(0L);
         return facultyRepository.save(faculty);
     }
 
