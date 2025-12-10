@@ -2,8 +2,12 @@ package ru.hogwarts.school.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.hogwarts.school.dto.StudentDTO;
 import ru.hogwarts.school.model.Faculty;
+import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.FacultyService;
+
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/faculty")
@@ -44,5 +48,19 @@ public class FacultyController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/{id}/students")
+    public ResponseEntity<Collection<StudentDTO>> getStudentsByFaculty(@PathVariable Long id) {
+        Collection<StudentDTO> students = facultyService.findStudentsByFacultyId(id);
+        return ResponseEntity.ok(students);
+    }
+
+    @GetMapping
+    public ResponseEntity<Collection<Faculty>> findFacultiesByString(@RequestParam(required = false) String search) {
+        if (search != null && !search.isBlank()) {
+            return ResponseEntity.ok(facultyService.findByNameAndColor(search));
+        }
+        return ResponseEntity.ok(facultyService.findAllFaculties());
     }
 }

@@ -1,21 +1,28 @@
 package ru.hogwarts.school.service;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import ru.hogwarts.school.dto.FacultyDTO;
+import ru.hogwarts.school.mapper.FacultyMapper;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
+
+import java.util.Collection;
+import java.util.List;
 
 @Service
 public class StudentService {
 
     private final StudentRepository studentRepository;
+    private final FacultyMapper facultyMapper;
 
-    public StudentService(StudentRepository studentRepository) {
+    public StudentService(StudentRepository studentRepository, FacultyMapper facultyMapper) {
         this.studentRepository = studentRepository;
+        this.facultyMapper = facultyMapper;
     }
 
     public Student createStudent(Student student) {
-        student.setId(0L);
         return studentRepository.save(student);
     }
 
@@ -36,5 +43,18 @@ public class StudentService {
             return true;
         }
         return false;
+    }
+
+    public Collection<Student> findByAgeBetween(Integer min, Integer max) {
+        return studentRepository.findStudentsByAgeBetween(min, max);
+    }
+
+
+    @Transactional
+    public FacultyDTO findFacultyByStudentId(Long studentId) {
+        return studentRepository.findById(studentId)
+            .map(Student::getFaculty)
+            .map(facultyMapper::toDto)
+            .orElse(null);
     }
 }
