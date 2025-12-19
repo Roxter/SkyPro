@@ -1,8 +1,8 @@
 package ru.hogwarts.school.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
 
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
 

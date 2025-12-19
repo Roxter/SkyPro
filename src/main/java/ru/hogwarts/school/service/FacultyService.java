@@ -54,11 +54,11 @@ public class FacultyService {
     @Transactional
     public Collection<StudentDTO> findStudentsByFacultyId(Long facultyId) {
         return facultyRepository.findById(facultyId)
-            .map(Faculty::getStudents)
-            .map(students -> students.stream()
-                .map(studentMapper::toDto)
-                .collect(Collectors.toList()))
-            .orElse(Collections.emptyList());
+                .map(Faculty::getStudents)
+                .map(students -> students.stream()
+                        .map(studentMapper::toDto)
+                        .collect(Collectors.toList()))
+                .orElse(Collections.emptyList());
     }
 
     public Collection<Faculty> findAllFaculties() {
