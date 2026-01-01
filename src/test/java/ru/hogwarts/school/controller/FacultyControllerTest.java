@@ -115,8 +115,20 @@ public class FacultyControllerTest {
 
     @Test
     public void testGetAllFaculties() throws Exception {
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/faculty", String.class))
-            .isNotNull();
+        Faculty faculty = new Faculty();
+        faculty.setName("TestFaculty");
+        faculty.setColor("TestColor");
+
+        String url = "http://localhost:" + port + "/faculty";
+        Faculty createdFaculty = restTemplate.postForObject(url, faculty, Faculty.class);
+        long acceptedId = createdFaculty.getId();
+
+        String getAllUrl = "http://localhost:" + port + "/faculty";
+        String response = restTemplate.getForObject(getAllUrl, String.class);
+
+        assertThat(response).isNotNull();
+        assertThat(response).contains("TestFaculty");
+        restTemplate.delete(url + "/" + acceptedId);
     }
 
     @Test
