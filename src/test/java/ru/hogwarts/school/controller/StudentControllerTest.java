@@ -5,13 +5,18 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import ru.hogwarts.school.mapper.FacultyMapper;
+import ru.hogwarts.school.mapper.StudentMapper;
 import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.repository.StudentRepository;
 import ru.hogwarts.school.service.StudentService;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -27,10 +32,19 @@ public class StudentControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
+    private StudentRepository studentRepository;
+
+    @SpyBean
     private StudentService studentService;
+
+    @SpyBean
+    private StudentMapper studentMapper;
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @SpyBean
+    private FacultyMapper facultyMapper;
 
     @Test
     public void getStudentByIdTest() throws Exception {
@@ -40,7 +54,7 @@ public class StudentControllerTest {
 
         Student student = new Student(id, name, age);
 
-        when(studentService.findById(id)).thenReturn(student);
+        when(studentRepository.findById(id)).thenReturn(Optional.of(student));
 
         mockMvc.perform(get("/student/{id}", id))
             .andExpect(status().isOk())
@@ -51,7 +65,9 @@ public class StudentControllerTest {
 
     @Test
     public void getStudentNotFoundTest() throws Exception {
-        when(studentService.findById(any(Long.class))).thenReturn(null);
+        Long id = 1L;
+
+        when(studentRepository.findById(id)).thenReturn(Optional.empty());
 
         mockMvc.perform(get("/student/{id}", 1L))
             .andExpect(status().isNotFound());
@@ -64,9 +80,9 @@ public class StudentControllerTest {
         int age = 12;
 
         Student studentRequest = new Student(0L, name, age);
-        Student studentResponse = new Student(id, name, age);
+        Student studentSavedInDb = new Student(id, name, age);
 
-        when(studentService.createStudent(any(Student.class))).thenReturn(studentResponse);
+        when(studentRepository.save(any(Student.class))).thenReturn(studentSavedInDb);
 
         mockMvc.perform(post("/student")
             .content(objectMapper.writeValueAsString(studentRequest))
@@ -86,7 +102,8 @@ public class StudentControllerTest {
 
         Student studentRequest = new Student(id, name, age);
 
-        when(studentService.updateStudent(any(Student.class))).thenReturn(studentRequest);
+        when(studentRepository.existsById(id)).thenReturn(true);
+        when(studentRepository.save(any(Student.class))).thenReturn(studentRequest);
 
         mockMvc.perform(put("/student")
             .content(objectMapper.writeValueAsString(studentRequest))
@@ -101,7 +118,7 @@ public class StudentControllerTest {
     @Test
     public void deleteStudentTest() throws Exception {
         Long id = 1L;
-        when(studentService.deleteById(id)).thenReturn(true);
+        when(studentRepository.existsById(id)).thenReturn(true);
 
         mockMvc.perform(delete("/student/{id}", id))
             .andExpect(status().isNoContent());
@@ -110,7 +127,7 @@ public class StudentControllerTest {
     @Test
     public void deleteStudentNotFoundTest() throws Exception {
         Long id = 1L;
-        when(studentService.deleteById(id)).thenReturn(false);
+        when(studentRepository.existsById(id)).thenReturn(false);
 
         mockMvc.perform(delete("/student/{id}", id))
             .andExpect(status().isNotFound());
@@ -124,7 +141,7 @@ public class StudentControllerTest {
         Student student = new Student(1L, "Harry", 12);
         List<Student> students = Collections.singletonList(student);
 
-        when(studentService.findByAgeBetween(min, max)).thenReturn(students);
+        when(studentRepository.findStudentsByAgeBetween(min, max)).thenReturn(students);
 
         mockMvc.perform(get("/student")
             .param("min", String.valueOf(min))
