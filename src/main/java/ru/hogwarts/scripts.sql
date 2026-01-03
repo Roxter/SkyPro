@@ -24,6 +24,11 @@ INSERT INTO student (id, name, age, faculty_id) VALUES
 (nextval('student_seq'), 'Padma Patil', 12, 4),
 (nextval('student_seq'), 'Cassandra Vablatsky', 15, NULL);
 
+SELECT setval('faculty_seq', (SELECT MAX(id) FROM faculty));
+SELECT setval('student_seq', (SELECT MAX(id) FROM student));
+
+TRUNCATE TABLE student, faculty RESTART IDENTITY CASCADE;
+
 SELECT * FROM student WHERE age BETWEEN 10 AND 20;
 
 SELECT name FROM student;
