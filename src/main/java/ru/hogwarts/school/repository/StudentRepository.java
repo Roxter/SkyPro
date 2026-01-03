@@ -12,4 +12,13 @@ import java.util.Optional;
 public interface StudentRepository extends JpaRepository<Student, Long> {
     @Query("SELECT s FROM Student s JOIN FETCH s.faculty WHERE s.age BETWEEN ?1 AND ?2")
     Collection<Student> findStudentsByAgeBetween(int minAge, int maxAge);
+
+    @Query(value = "SELECT COUNT(*) FROM student", nativeQuery = true)
+    Integer getCountOfStudents();
+
+    @Query(value = "SELECT AVG(age) FROM student", nativeQuery = true)
+    Double getAverageAgeOfStudents();
+
+    @Query(value = "SELECT * FROM student ORDER BY id DESC LIMIT 5", nativeQuery = true)
+    Collection<Student> getLastFiveStudents();
 }

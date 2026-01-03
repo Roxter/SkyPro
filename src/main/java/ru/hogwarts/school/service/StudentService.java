@@ -57,4 +57,17 @@ public class StudentService {
             .map(facultyMapper::toDto)
             .orElse(null);
     }
+
+    public Integer getStudentCount() {
+        return studentRepository.getCountOfStudents();
+    }
+
+    public Double getAverageAge() {
+        Double avg = studentRepository.getAverageAgeOfStudents();
+        return avg != null ? avg : 0.0;
+    }
+
+    public Collection<Student> getLastFiveStudents() {
+        return studentRepository.getLastFiveStudents();
+    }
 }
