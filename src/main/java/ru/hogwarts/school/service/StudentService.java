@@ -3,13 +3,15 @@ package ru.hogwarts.school.service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.dto.FacultyDTO;
+import ru.hogwarts.school.dto.StudentDTO;
 import ru.hogwarts.school.mapper.FacultyMapper;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.*;
 
 @Service
 public class StudentService {
@@ -69,5 +71,21 @@ public class StudentService {
 
     public Collection<Student> getLastFiveStudents() {
         return studentRepository.getLastFiveStudents();
+    }
+
+    public Collection<String> getAllStudentsByNamesStartingWithA() {
+        return studentRepository.findAll().stream()
+            .map(Student::getName)
+            .map(String::toUpperCase)
+            .filter(name -> name.startsWith("A"))
+            .sorted()
+            .collect(Collectors.toList());
+    }
+
+    public Double getAverageAgeByStream() {
+        return studentRepository.findAll().stream()
+            .mapToInt(Student::getAge)
+            .average()
+            .orElse(0.0);
     }
 }

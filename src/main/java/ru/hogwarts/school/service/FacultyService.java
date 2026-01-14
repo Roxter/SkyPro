@@ -11,6 +11,7 @@ import ru.hogwarts.school.repository.FacultyRepository;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.stream.Collectors;
 
 @Service
@@ -63,5 +64,12 @@ public class FacultyService {
 
     public Collection<Faculty> findAllFaculties() {
         return facultyRepository.findAll();
+    }
+
+    public String getLongestFacultyName() {
+        return facultyRepository.findAll().stream()
+            .map(Faculty::getName)
+            .max(Comparator.comparingInt(String::length))
+            .orElse(null);
     }
 }

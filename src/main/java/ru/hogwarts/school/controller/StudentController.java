@@ -3,12 +3,10 @@ package ru.hogwarts.school.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.dto.FacultyDTO;
-import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
 
 import java.util.Collection;
-import java.util.List;
 
 @RestController
 @RequestMapping("/student")
@@ -81,5 +79,15 @@ public class StudentController {
     @GetMapping("/last-five")
     public Collection<Student> getLastFiveStudents() {
         return studentService.getLastFiveStudents();
+    }
+
+    @GetMapping("/filter-by-name")
+    public ResponseEntity<Collection<String>> getAllStudentsByNamesStartingWithA() {
+        return ResponseEntity.ok(studentService.getAllStudentsByNamesStartingWithA());
+    }
+
+    @GetMapping("/avg-age-stream")
+    public Double getAverageAgeByStream() {
+        return studentService.getAverageAgeByStream();
     }
 }
