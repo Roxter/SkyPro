@@ -1,12 +1,10 @@
 package ru.hogwarts.school.service;
 
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.core.CollectionFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.hogwarts.school.dto.StudentDTO;
 import ru.hogwarts.school.mapper.StudentMapper;
 import ru.hogwarts.school.model.Faculty;
-import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.FacultyRepository;
 
 import java.util.Collection;
@@ -55,11 +53,11 @@ public class FacultyService {
     @Transactional
     public Collection<StudentDTO> findStudentsByFacultyId(Long facultyId) {
         return facultyRepository.findById(facultyId)
-                .map(Faculty::getStudents)
-                .map(students -> students.stream()
-                        .map(studentMapper::toDto)
-                        .collect(Collectors.toList()))
-                .orElse(Collections.emptyList());
+            .map(Faculty::getStudents)
+            .map(students -> students.stream()
+                .map(studentMapper::toDto)
+                .collect(Collectors.toList()))
+            .orElse(Collections.emptyList());
     }
 
     public Collection<Faculty> findAllFaculties() {
