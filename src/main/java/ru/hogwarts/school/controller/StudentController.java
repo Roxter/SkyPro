@@ -6,7 +6,9 @@ import ru.hogwarts.school.dto.FacultyDTO;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("/student")
@@ -89,5 +91,55 @@ public class StudentController {
     @GetMapping("/avg-age-stream")
     public Double getAverageAgeByStream() {
         return studentService.getAverageAgeByStream();
+    }
+
+    @GetMapping("/print-parallel")
+    public void printParallel() {
+        List<Student> students = new ArrayList<>(studentService.findAll());
+
+        if (students.size() < 6) {
+            System.out.println("В базе мало студентов! Нужно минимум 6.");
+            return;
+        }
+
+        System.out.println("Main Thread: " + students.get(0).getName());
+        System.out.println("Main Thread: " + students.get(1).getName());
+
+        new Thread(() -> {
+            System.out.println("Thread-1: " + students.get(2).getName());
+            System.out.println("Thread-1: " + students.get(3).getName());
+        }).start();
+
+        new Thread(() -> {
+            System.out.println("Thread-2: " + students.get(4).getName());
+            System.out.println("Thread-2: " + students.get(5).getName());
+        }).start();
+    }
+
+    @GetMapping("/print-synchronized")
+    public void printSynchronized() {
+        List<Student> students = new ArrayList<>(studentService.findAll());
+
+        if (students.size() < 6) {
+            System.out.println("В базе мало студентов! Нужно минимум 6.");
+            return;
+        }
+
+        printNameSynchronized(students.get(0).getName());
+        printNameSynchronized(students.get(1).getName());
+
+        new Thread(() -> {
+            printNameSynchronized(students.get(2).getName());
+            printNameSynchronized(students.get(3).getName());
+        }).start();
+
+        new Thread(() -> {
+            printNameSynchronized(students.get(4).getName());
+            printNameSynchronized(students.get(5).getName());
+        }).start();
+    }
+
+    private synchronized void printNameSynchronized(String name) {
+        System.out.println(name);
     }
 }

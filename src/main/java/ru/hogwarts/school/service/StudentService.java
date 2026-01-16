@@ -88,4 +88,8 @@ public class StudentService {
             .average()
             .orElse(0.0);
     }
+
+    public Collection<Student> findAll() {
+        return studentRepository.findAll();
+    }
 }
